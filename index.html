@@ -92,7 +92,7 @@
       <li><strong>Syntax</strong> 上的調整。 <br /> Ex. print -> print(), with ... as, list comprehension</li>
       <li>string 原生對 <strong>unicode</strong> 支援</li>
       <li>2.5 = 3.0, 2.6 = 3.1, 2.7 = 3.2</li>
-      <li>3.3(2012.09)為全新版本，2.X不再更新功能</li>
+      <li>3.3(2012.09) 為全新版本，2.x 不再更新功能</li>
       <li>建議直接學 3.3，有問題再回到 2.7 </li>
     </ul>
     <h3>相對的缺點</h3>
@@ -114,20 +114,111 @@
 </section>
 <section class='slide'>
   <p> Demo 兩種操作方式 </p>
-  <p><pre class='brush: bash'>
+  <p>1. Interactive mode<pre class='brush: bash'>
     $ python3   # or ipython3
     >>> print('Hello World')
     >>> import platform
     >>> platform, print # everything is an object
     >>> type(platform)
     >>> dir(paltform) # view object attributes
-    >>> platform.name()</pre>
-  <pre class='brush: py'>
+    >>> platform.name()</pre></p>
+  <p>2. Execute from file<pre class='brush: py'>
     print('Hello World')
     import platform   # way to import a std library
     platform.uname()  # function call
   </pre></p>
-  </section>
+</section>
+<section class='slide'>
+  <h2>基本型別 - 1</h2>
+  <p> Immutable. More on <a href="http://docs.python.org/3/library/stdtypes.html">@Official</a> or <a href="http://getpython3.com/diveintopython3/native-datatypes.html">@DiveIntoPython3</a></p>
+  <ul>
+    <li>Boolean: <code>True</code>, <code>False</code>. </li>
+    <li>Strings: Unicode, "..." or '...'. <br />Ex. <code>"我是unicode"</code> （之後詳述）<br /> str(), __str__()</li>
+    <li>Numbers:<ul>
+      <li>整數decimal ( <code>int</code> ) <br />
+      1, 2, 3, ...</li>
+      <li>小數 ( <code>float</code> ) <br />
+      1.2, 3.444, 5.2321141..., ...</li>
+      <li>虛數 ( <code>complex</code> ) <br />
+      1+2j, objc.real, objc.imag</li>
+      <li>分數 ( <code>Fraction</code> in package <code>fractions</code> ) <br />
+      fraction.Fraction(2,5)</li>
+      <li>常見運算： <br />
+      int(), float(), *, /, //, %, **</li>
+      <li>package <code>math</code>
+    </ul></li>
+  </ul>
+</section>
+<section class='slide'>
+  <h3>Demo of Boolean, Numbers, and String</h3>
+  <p><pre class='brush: py'>
+    # Bool
+    x = True
+    type(x)
+
+    # String
+    x = "我是unicode"   # accept both ' ', " "
+    x == '我是unicode'  # string value comparison
+    'ab' < 'abc'
+    'a' + "ccc", 'a'*8
+
+    # Numbers
+    import fractions
+    for x in [1, 1.234, fraction.Fraction(5,10), 3 + 5j]:
+        print(type(x))
+
+    # basic operation of numbers
+    8 /4, 3 / 4, 5.0 / 2.0
+    5 // 2, 6.0 // 2.4
+    5 % 2, 6 % 3
+    2 * 3, 1 + 1j * 1 - 1j
+    4 ** 3
+
+    # manipulation of numbers
+    f = 1 + 2.5
+    f = 1 + 2.0
+    f.is_integer()
+    int(f)              # change type into int
+    str(f)              # convert to string
+    f = f + fractions.Fraction(4,3)
+    float(fractions.Fraction(3,7))
+    round(f)
+
+    # more math function
+    import math         
+    math.ceil(f)
+    math.floor(f)
+    math.tan(math.pi / 4) # float has not infinite accuracy
+    1 / 0               # raise Exception ZeroDivisionError
+  </pre></p>
+</section>
+<section class='slide'>
+<h2>基本型別 - 2</h2>
+<p> Mutable data structure</p>
+  <ul>
+    <li>List <code>list</code><ul>
+      <li>sequential items, array of variable length </li>
+      <li>implemented using link list, just like vector in C++ STL.</li>
+      <li> l = [n1, n2, n3]</li>
+    </ul></li>
+    <li>Dictionary <code>dict</code><ul>
+      <li> key-value pairsdata strcture. Has a hash table for keys. </li>
+      <li>d = {k1:v1, k2:v2, k3:v3}</li>
+    </ul></li>
+    <li>Set <code>set</code><ul>
+      <li>unodered unique values of immutable datatype. Use hash table.</li>
+      <li>像數學中的集合</li>
+      <li>s = {i1, i2, i3}</li>
+    </ul></li>
+  </ul>
+<p>Immutable data structure</p>
+  <ul>
+    <li>Tuple <code>tuple</code> <ul>
+      <li>cannot be changed once created.</li>
+      <li>t = (n1, n2, n3)</li>
+    </ul></li>
+  </ul>
+</section>
   <!-- slides end -->
 
   <!-- deck.js start -->
