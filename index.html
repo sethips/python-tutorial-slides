@@ -118,8 +118,10 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         <li>使用內建的函式即是呼叫對應的 C code，會用 C 的速度來執行</li>
         <li>如果是自己寫的函式的話，則就會用 python 的速度來執行，一般來說相差大約30倍</li>
         <li>原則：盡量用現有的函式來兜（兜的方法之後會介紹）</li>
+        <li>(Advanced) JIT Compiler: <a href="http://pypy.org/">pypy</a>
+        <br />a Python intepreter for Python with 30% up faster</li>
     </ul>
-    <center><h3 style='color: pink'> 立馬來 demo !! </h3></center>
+    <center><h3 style='color: red'> 立馬來 demo !! </h3></center>
 </section>
 <section class='slide'>
     <h3> Demo 兩種操作方式 </h3>
@@ -405,6 +407,11 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
 </section>
 
 <section class='slide'>
+    <h3>Demo of Loops</h3>
+</section>
+
+
+<section class='slide'>
     <h2>Functions</h2>
     <ul>
         <li> Parameter passing - <strong style='color: red'>pass by name (reference)</strong></li>
@@ -419,6 +426,7 @@ def myfunction(arg1, arg2, arg3=True, arg4=None):
     return x
     </pre></p>
     <p><pre class='brush: py'>
+# test_arg.py
 def vari_len_arg_fnt(arg1, *args):
     print('first arg:', arg1)
     affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
@@ -451,8 +459,64 @@ variable_len_arg_fnt('must input', 'after that',
         <li>enumerate()</li>
     </ul>
 </section>
-
 <section class='slide'>
+    <h2>In-line if</h2>
+    <p>Powerful tool in Python.</p>
+<p><pre class='brush: py'>
+some_dict = {
+    'header': this.name,
+    'body': this.content if this.content else "No BODY",
+    'index': this.index
+    }
+</pre></p>
+<p><pre class='brush: py'>
+# test_arg_inline.py
+def vari_len_arg_fnt(arg1, *args):
+    print('first arg:', arg1)
+    affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
+    for i, arg_i in enumerate(args):
+        print(str(i) + ('th' if i not in affix_dict else affix_dict[i]),
+              'arg:', arg_i)
+</pre></p>
+</section>
+<section class='slide'>
+    <h2>(List) Comprehension</h2>
+    <ul>
+        <li>Obtain <strong>best speed</strong> in most cases.</li>
+        <li>In Python 2 people may use map().</li>
+    </ul>
+<p><pre class='brush: py'>
+# demo_list_comprehension.py
+def for_loop():
+    x = []
+    for i in range(100000):
+        x.append('chr' + str(i))
+    return x
+
+def list_comp():
+    return ['chr' + str(i) for i in range(100000)]
+
+def list_comp_formatter():
+    return ['chr{:d}'.format(i) for i in range(100000)]
+
+if __name__ == '__main__':
+    from timeit import timeit
+    print('Python for loop:',
+          timeit("for_loop()",
+                 setup="from __main__ import for_loop",
+                 number=100))
+    print('List Comprehension:',
+          timeit("list_comp()",
+                 setup="from __main__ import list_comp",
+                 number=100))
+    print('List Comp. with string formatter:',
+          timeit("list_comp_formatter()",
+                 setup="from __main__ import list_comp_formatter",
+                 number=100))
+</pre></p>
+</section>
+<section class='slide'>
+    <h2>Lambda Function</h2>
     <h2>Class</h2>
 </section>
 
