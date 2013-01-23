@@ -377,7 +377,7 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
 
 <section class='slide'>
     <h2>Control Flow Tools</h2>
-    <p> 大致上就跟大家的語言都一樣 </p>
+    <p> 大致上就跟大家的語言都一樣 <a href="http://docs.python.org/3/tutorial/controlflow.html">@Official</a> </p>
     <ul>
         <li><code>if ... else ...</code> <br /><code>if ... elif ... elif ... else ...</code></li>
         <li><code>for ... in ... </code></li>
@@ -392,20 +392,70 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
     <ul>
         <li> 只會用到「:」與「縮排」</li>
         <li> 判斷式常用的刮號 ()、大刮號 {}；每行分號 ; 皆可加皆不加</li>
-        <li> 一行如果寫太長，可以用「\」來分成兩行，後方不能有空白（不推薦使用 <pre class='brush:py'>
-            if this.line is "an extra long sentence" and \
-                you.could("then do this by adding a '\'"):
-                you.do_sth_here_in_if()     # inside if
-                extra_thing_in_if_here()
-            you.do_sth_out_of_if()  # outside if
-        </pre></li>
+        <li> 一行如果寫太長，可以用「\」來分成兩行，後方不能有空白（不推薦使用</li>
         <li> You will need a good <strong style='color: red'>coding style</strong> !!</li>
+    </ul>
+    <p><pre class='brush:py'>
+        if this.line is "an extra long sentence" and \
+            you.could("then do this by adding a '\'"):
+            you.do_sth_here_in_if()     # inside if
+            extra_thing_in_if_here()
+        you.do_sth_out_of_if()  # outside if
+    </pre></p>
+</section>
+
+<section class='slide'>
+    <h2>Functions</h2>
+    <ul>
+        <li> Parameter passing - <strong style='color: red'>pass by name (reference)</strong></li>
+        <li><code>*args</code>, <code>**argv</code>
+        accept variable numbers of arguments </li>
+        <li>functions with no return value would return <code>None</code> (null) </li>
+    </ul>
+    <p><pre class='brush: py'>
+def myfunction(arg1, arg2, arg3=True, arg4=None):
+    # do something here or put a 'pass' ...
+    x = []
+    return x
+    </pre></p>
+    <p><pre class='brush: py'>
+def vari_len_arg_fnt(arg1, *args):
+    print('first arg:', arg1)
+    affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
+    for i, arg_i in enumerate(args):
+        if i not in affix_dict:
+            affix = 'th'
+        else:
+            affix = affix_dict[i]
+        print(str(i) + affix, 'arg:', arg_i)
+variable_len_arg_fnt('must input', 'after that',
+    'I can put', 'as many args', 'as I want', 'YA')
+    </pre></p>
+</section>
+
+<section class='slide'>
+<h2>Built-in Functions</h2>
+    <ul>
+        <li>sorted()</li>
+        <li>min(), max(), abs()</li>
+        <li>print()</li>
     </ul>
 </section>
 
 <section class='slide'>
-    
+    <h2>More on String, File and Iterator</h2>
+    <ul>
+        <li>zip()</li>        
+        <li>next()</li>
+        <li>range()</li>
+        <li>enumerate()</li>
+    </ul>
 </section>
+
+<section class='slide'>
+    <h2>Class</h2>
+</section>
+
 <!-- slides end -->
 
 <!-- deck.js start -->
