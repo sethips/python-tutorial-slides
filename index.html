@@ -1,270 +1,457 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=1024, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
 
-  <title>Python Tutorial</title>
+    <title>Python Tutorial</title>
 
-  <!-- deck.js start -->
-  <!-- Required stylesheet -->
-  <link rel="stylesheet" href="lib/deck.js/core/deck.core.css">
+    <!-- deck.js start -->
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" href="lib/deck.js/core/deck.core.css">
 
-  <!-- Extension CSS files go here. Remove or add as needed. -->
-  <link rel="stylesheet" href="lib/deck.js/extensions/goto/deck.goto.css">
-  <link rel="stylesheet" href="lib/deck.js/extensions/menu/deck.menu.css">
-  <link rel="stylesheet" href="lib/deck.js/extensions/navigation/deck.navigation.css">
-  <link rel="stylesheet" href="lib/deck.js/extensions/status/deck.status.css">
-  <link rel="stylesheet" href="lib/deck.js/extensions/hash/deck.hash.css">
-  <link rel="stylesheet" href="lib/deck.js/extensions/scale/deck.scale.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" href="lib/deck.js/extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/status/deck.status.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/hash/deck.hash.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/scale/deck.scale.css">
 
-  <!-- Style theme. More available in /themes/style/ or create your own. -->
-  <link rel="stylesheet" href="lib/deck.js/themes/style/swiss.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" href="lib/deck.js/themes/style/swiss.css">
 
-  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
-  <link rel="stylesheet" href="lib/deck.js/themes/transition/horizontal-slide.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" href="lib/deck.js/themes/transition/horizontal-slide.css">
 
-  <!-- Required Modernizr file -->
-  <script src="lib/deck.js/modernizr.custom.js"></script>
-  <!-- deck.js end -->
+    <!-- Required Modernizr file -->
+    <script src="lib/deck.js/modernizr.custom.js"></script>
+    <!-- deck.js end -->
 
-  <!-- syntaxhighlighter start -->
-  <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shCore.js"></script>
-  <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shBrushPython.js"></script>
-  <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shBrushBash.js"></script>
-  <link type="text/css" rel="stylesheet" href="lib/syntaxhighlighter/styles/shCoreDefault.css"/>
-  <script type="text/javascript">
-    SyntaxHighlighter.defaults['toolbar'] = false;
-    SyntaxHighlighter.all();
-  </script>
-  <style type="text/css">
-    .syntaxhighlighter { overflow-y: hidden !important; }
-  </style>
-  <!-- syntaxhighlighter end -->
+    <!-- syntaxhighlighter start -->
+    <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <link type="text/css" rel="stylesheet" href="lib/syntaxhighlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <style type="text/css">
+        .syntaxhighlighter { overflow-y: hidden !important; }
+    </style>
+    <!-- syntaxhighlighter end -->
 </head>
 
 <body class="deck-container">
-  <!-- slides start -->
-  <section class='slide' id='title'>
+<!-- slides start -->
+<section class='slide' id='title'>
     <div class = 'vcenter'>
-      <h1 style='font-size: 64px'> Python 2+3 Quick Intro in 2 Hours </h1>
-      <p style='margin-top: 30px'> Liang Bo Wang <br /> 2013.01</p>
+        <h1 style='font-size: 64px'> Python 2+3 Quick Intro in 2 Hours </h1>
+        <p style='margin-top: 30px'> Liang Bo Wang <br /> 2013.01</p>
     </div>
-  </section>
-  <section class='slide' id='today'>
+</section>
+<section class='slide' id='today'>
     <h2>今天</h2>
     <ul>
-      <li> 不會談技術細節 </li>
-      <li> 也不會講到很細的運作流程（但值得花時間看）</li>
-      <li> 盡量用舉例的 </li>
-      <li> live demo = life demo，掛在台上請見諒 </li>
-      <li> 可以會有點中英交雜… </li>
-      <li> 已經把 2.7.3, 3.3.0 安裝在 171, 173 上面，等一下可以直接操作</li>
+        <li> 不會談技術細節 </li>
+        <li> 也不會講到很細的運作流程（但值得花時間看）</li>
+        <li> 盡量用舉例的 </li>
+        <li> live demo = life demo，掛在台上請見諒 </li>
+        <li> 可以會有點中英交雜… </li>
+        <li> 已經把 2.7.3, 3.3.0 安裝在 171, 173 上面，等一下可以直接操作</li>
     </ul>
-  </section>
+</section>
 
-  <section class='slide'>
+<section class='slide'>
     <h2>Python 簡介</h2>
     <ul>
-      <li> 詳見 <a href='http://zh.wikipedia.org/zh-tw/Python'>Wiki</a></li>
-      <li> 國外還蠻多人用的，套件非常多 </li>
-      <li> 好學，開發速度快，簡潔整齊code，跨平台 </li>
-      <li> 官方網站的教學寫得很好，不唬爛 </li> 
-      <li> 標準套件強大 </li>
+        <li> 詳見 <a href='http://zh.wikipedia.org/zh-tw/Python'>Wiki</a></li>
+        <li> 國外還蠻多人用的，套件非常多 </li>
+        <li> 好學，開發速度快，簡潔整齊code，跨平台 </li>
+        <li> 官方網站的教學寫得很好，不唬爛 </li> 
+        <li> 標準套件強大 </li>
     </ul>
     <h3>版本命名方式</h3>
     <p><pre class='brush: bash'>
-    $ python -V # check python version
-    Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
+$ python -V # check python version
+Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
     <ul>
-      <li> V, x 都是大改版，像function, library的調整。可以查官網的change log </li>
-      <li> 相同 V 的 code 都可以向後相容，所以理論上2.5的code在2.7上也可以執行 </li>
-      <li> y 是 bug fix 跟提昇效能 </li>
-      <li> V = 2 or 3，是相容性的例外（後述）</li>
+        <li> V, x 都是大改版，像function, library的調整。可以查官網的change log </li>
+        <li> 相同 V 的 code 都可以向後相容，所以理論上2.5的code在2.7上也可以執行 </li>
+        <li> y 是 bug fix 跟提昇效能 </li>
+        <li> V = 2 or 3，是相容性的例外（後述）</li>
     </ul>
-  </section>
+</section>
 
-  <section class='slide'>
+<section class='slide'>
     <h2>Python 3 (Py3k)</h2>
     <ul>
-      <li>把一些舊時代的垃圾清掉，整合 library。 <br /> Ex. urllib, urllib2; popen2(), popen3(), popen4()</li> 
-      <li><strong>Syntax</strong> 上的調整。 <br /> Ex. print -> print(), with ... as, list comprehension</li>
-      <li>string 原生對 <strong>unicode</strong> 支援</li>
-      <li>2.5 = 3.0, 2.6 = 3.1, 2.7 = 3.2</li>
-      <li>3.3(2012.09) 為全新版本，2.x 不再更新功能</li>
-      <li>建議直接學 3.3，有問題再回到 2.7 </li>
+        <li>把一些舊時代的垃圾清掉，整合 library。 <br /> Ex. urllib, urllib2; popen2(), popen3(), popen4()</li> 
+        <li><strong>Syntax</strong> 上的調整。 <br /> Ex. print -> print(), with ... as, list comprehension</li>
+        <li>string 原生對 <strong>unicode</strong> 支援</li>
+        <li>2.5 = 3.0, 2.6 = 3.1, 2.7 = 3.2</li>
+        <li>3.3(2012.09) 為全新版本，2.x 不再更新功能</li>
+        <li>建議直接學 3.3，有問題再回到 2.7 </li>
     </ul>
     <h3>相對的缺點</h3>
     <ul>
-      <li>有些套件還沒相容（停止開發、大套件），但這是趨勢且大部份都已經相容。<br />例外：Scipy ( 3.3 還再等 )</li>
-      <li>效能差於 2.7.3 </li>
+        <li>有些套件還沒相容（停止開發、大套件），但這是趨勢且大部份都已經相容。<br />例外：Scipy ( 3.3 還再等 )</li>
+        <li>效能差於 2.7.3 </li>
     </ul>
-  </section>
-  <section class='slide'>
-  <h2> 語言介紹</h2>
-  <ul>
-    <li>dynamic typing, intepretion, scipt, OOP</li>
-    <li>所以可以很像 Matlab，可以逐行執行/運行腳本</li>
-    <li>變數不用宣告，型別不固定</li>
-    <li>（不過是強型別，不會自動型別轉換）</li>
-    <li>但他也可以使用 OOP 的方式來寫（萬物皆 object）</li>
-  </ul>
-  <center><p> 立馬來 demo !! </p></center>
 </section>
 <section class='slide'>
-  <p> Demo 兩種操作方式 </p>
-  <p>1. Interactive mode<pre class='brush: bash'>
-    $ python3   # or ipython3
-    >>> print('Hello World')
-    >>> import platform
-    >>> platform, print # everything is an object
-    >>> type(platform)
-    >>> dir(paltform) # view object attributes
-    >>> platform.name()</pre></p>
-  <p>2. Execute from file<pre class='brush: py'>
-    print('Hello World')
-    import platform   # way to import a std library
-    platform.uname()  # function call
-  </pre></p>
+    <h2> 語言介紹</h2>
+    <ul>
+        <li>dynamic typing, intepretion, scipt, OOP</li>
+        <li>所以可以很像 Matlab，可以逐行執行/運行腳本</li>
+        <li>變數不用宣告，型別不固定</li>
+        <li>（不過是強型別，不會自動型別轉換）</li>
+        <li>但他也可以使用 OOP 的方式來寫（萬物皆 object）</li>
+    </ul>
+    <h3> 執行速度</h3>
+    <ul>
+        <li>跨平台的關系，不會直接把原始碼編譯成機器碼</li>
+        <li>會動態的把 python script 轉換成機器碼</li>
+        <li>官方的版本以 C 實作 (CPython)</li>
+        <li>使用內建的函式即是呼叫對應的 C code，會用 C 的速度來執行</li>
+        <li>如果是自己寫的函式的話，則就會用 python 的速度來執行，一般來說相差大約30倍</li>
+        <li>原則：盡量用現有的函式來兜（兜的方法之後會介紹）</li>
+    </ul>
+    <center><h3 style='color: pink'> 立馬來 demo !! </h3></center>
 </section>
 <section class='slide'>
-  <h2>基本型別 - 1</h2>
-  <p> Immutable. More on <a href="http://docs.python.org/3/library/stdtypes.html">@Official</a> or <a href="http://getpython3.com/diveintopython3/native-datatypes.html">@DiveIntoPython3</a></p>
-  <ul>
-    <li>Boolean: <code>True</code>, <code>False</code>. </li>
-    <li>Strings: Unicode, "..." or '...'. <br />Ex. <code>"我是unicode"</code> （之後詳述）<br /> str(), __str__()</li>
-    <li>Numbers:<ul>
-      <li>整數decimal ( <code>int</code> ) <br />
-      1, 2, 3, ...</li>
-      <li>小數 ( <code>float</code> ) <br />
-      1.2, 3.444, 5.2321141..., ...</li>
-      <li>虛數 ( <code>complex</code> ) <br />
-      1+2j, objc.real, objc.imag</li>
-      <li>分數 ( <code>Fraction</code> in package <code>fractions</code> ) <br />
-      fraction.Fraction(2,5)</li>
-      <li>常見運算： <br />
-      int(), float(), *, /, //, %, **</li>
-      <li>package <code>math</code>
-    </ul></li>
-  </ul>
+    <h3> Demo 兩種操作方式 </h3>
+    <p>1. Interactive mode<pre class='brush: bash'>
+        $ python3           # or ipython3
+        >>> print('Hello World')
+        >>> import platform
+        >>> platform, print # everything is an object
+        >>> type(platform)
+        >>> dir(paltform)   # view object attributes
+        >>> platform.name()</pre></p>
+            <p>2. Execute from file<pre class='brush: py'>
+        print('Hello World')
+        import platform     # way to import a std library
+        platform.uname()    # function call
+    </pre></p>
 </section>
 <section class='slide'>
-  <h3>Demo of Boolean, Numbers, and String</h3>
-  <p><pre class='brush: py'>
-    # Bool
-    x = True
-    type(x)
+    <h2>基本型別 - 1</h2>
+    <p> Immutable. More on <a href="http://docs.python.org/3/library/stdtypes.html">@Official</a> or <a href="http://getpython3.com/diveintopython3/native-datatypes.html">@DiveIntoPython3</a></p>
+    <ul>
+        <li>Boolean: <code>True</code>, <code>False</code>. </li>
+        <li>Strings: <ul>
+            <li>Unicode</li>
+            <li>s = '...' or "..."</li>
+            <li>s = str(many datatypes)</li>
+            <li>之後會專門介紹</li>
+        </ul></li>
+        <li>Numbers:<ul>
+            <li>整數 <code>int</code><br />
+            n = 1, 2, 3, ...</li>
+            <li>小數 <code>float</code> <br />
+            f = 1.2, 3.444, 5.2321141..., ...</li>
+            <li>虛數 <code>complex</code> <br />
+            c = 1+2j, c.real, c.imag</li>
+            <li>分數 <code>Fraction</code> in package <code>fractions</code> <br />
+            r = fraction.Fraction(2,5)</li>
+            <li>常見運算： <br />
+            int(), float(), *, /, //, %, **</li>
+            <li>package <code>math</code>
+        </ul></li>
+        <li>File:</li>
+        <li>Iterator:<ul>
+            <li>之後再講</li>
+        </ul></li>
+    </ul>
+</section>
+<section class='slide'>
+    <h3>Demo of Boolean, Numbers, and String</h3>
+    <p><pre class='brush: py'>
+        # Bool
+        x = True
+        type(x)
 
-    # String
-    x = "我是unicode"   # accept both ' ', " "
-    x == '我是unicode'  # string value comparison
-    'ab' < 'abc'
-    'a' + "ccc", 'a'*8
+        # String
+        x = "我是unicode"       # accept both ' ', " "
+        x == '我是unicode'      # string value comparison
+        'ab' < 'abc'
+        'a' + "ccc", 'a'*8
 
-    # Numbers
-    import fractions
-    for x in [1, 1.234, fraction.Fraction(5,10), 3 + 5j]:
+        # Numbers
+        import fractions
+        for x in [1, 1.234, fraction.Fraction(5,10), 3 + 5j]:
         print(type(x))
 
-    # basic operation of numbers
-    8 /4, 3 / 4, 5.0 / 2.0
-    5 // 2, 6.0 // 2.4
-    5 % 2, 6 % 3
-    2 * 3, 1 + 1j * 1 - 1j
-    4 ** 3
+        # basic operation of numbers
+        8 / 4, 3 / 4, 5.0 / 2.0 # different behavior for int in 2.x
+        5 // 2, 6.0 // 2.4
+        5 % 2, 6 % 3
+        2 * 3, 1 + 1j * 1 - 1j
+        4 ** 3
 
-    # manipulation of numbers
-    f = 1 + 2.5
-    f = 1 + 2.0
-    f.is_integer()
-    int(f)              # change type into int
-    str(f)              # convert to string
-    f = f + fractions.Fraction(4,3)
-    float(fractions.Fraction(3,7))
-    round(f)
+        # manipulation of numbers
+        f = 1 + 2.5
+        f = 1 + 2.0
+        f.is_integer()
+        int(f)                  # change type into int
+        str(f)                  # convert to string
+        f = f + fractions.Fraction(4,3)
+        float(fractions.Fraction(3,7))
+        round(f)
 
-    # more math function
-    import math         
-    math.ceil(f)
-    math.floor(f)
-    math.tan(math.pi / 4) # float has not infinite accuracy
-    1 / 0               # raise Exception ZeroDivisionError
-  </pre></p>
+        # more math function
+        import math         
+        math.ceil(f)
+        math.floor(f)
+        math.tan(math.pi / 4)   # float has not infinite accuracy
+        1 / 0                   # raise Exception ZeroDivisionError
+    </pre></p>
 </section>
 <section class='slide'>
-<h2>基本型別 - 2</h2>
-<p> Mutable data structure</p>
-  <ul>
-    <li>List <code>list</code><ul>
-      <li>sequential items, array of variable length </li>
-      <li>implemented using link list, just like vector in C++ STL.</li>
-      <li> l = [n1, n2, n3]</li>
-    </ul></li>
-    <li>Dictionary <code>dict</code><ul>
-      <li> key-value pairsdata strcture. Has a hash table for keys. </li>
-      <li>d = {k1:v1, k2:v2, k3:v3}</li>
-    </ul></li>
-    <li>Set <code>set</code><ul>
-      <li>unodered unique values of immutable datatype. Use hash table.</li>
-      <li>像數學中的集合</li>
-      <li>s = {i1, i2, i3}</li>
-    </ul></li>
-  </ul>
-<p>Immutable data structure</p>
-  <ul>
-    <li>Tuple <code>tuple</code> <ul>
-      <li>cannot be changed once created.</li>
-      <li>t = (n1, n2, n3)</li>
-    </ul></li>
-  </ul>
+    <h2>基本型別 - 2</h2>
+    <p> Mutable data structure</p>
+    <ul>
+        <li>List <code>list</code><ul>
+            <li> ordered sequential items, array of variable length </li>
+            <li> implemented using link list, just like vector in C++ STL.</li>
+        </ul></li>
+        <li>Dictionary <code>dict</code><ul>
+            <li> unordered key-value pairs data strcture. Has a hash table for keys. </li>
+            <li> key is unique </li>
+        </ul></li>
+        <li>Set <code>set</code><ul>
+            <li>unodered unique values of immutable datatype. Use hash table.</li>
+            <li>像數學中的集合</li>
+        </ul></li>
+    </ul>
+    <pre class='brush: py'>
+        l = [n1, n2, n3]           # a list
+        d = {k1:v1, k2:v2, k3:v3}  # a dict
+        s = {i1, i2, i3}           # a set
+    </pre>
+    <p>Immutable data structure</p>
+    <ul>
+        <li>Tuple <code>tuple</code> <ul>
+            <li>cannot be changed once created.</li>
+            <li>used as passing parameters, data protection, and key of dict </li>
+        </ul></li>
+    </ul>
+    <pre class='brush: py'>
+        t = (n1, n2, n3)            # a tuple
+    </pre>
 </section>
-  <!-- slides end -->
+<section class='slide'>
+    <h3>Demo of Basic Datatypes:</h3>
+    <p><pre class='brush:py'>
+        # ----------- list ----------
+        # accept all different types in a same list
+        a_list = [1, 3, 'a', "qwef", [13, 303], (1, 2)]    
 
-  <!-- deck.js start -->
-  <!-- Begin extension snippets. Add or remove as needed. -->
+        # use list as array, for both assignment and getting value
+        a_list[0], a_list[4][1]     # (1, 303)
+        a_list[-1]                  # accept negative index
+        a_list[1:3]                 # a range of index [start, end)
+        # if a range is not feasible it returns []
+        a_list[1:-1], a_list[-1:1]  
+        a_list[1:6:2]               # step=2 is accepted
+        a_list[1:6:2] = [1, 2, 3]   # one can do assignment 
+                                    # [1, 1, 'a', 2, [13, 303], 3]
+        # blank can be treated as to end or from start
+        a_list[2:]                  # ['a', 2, [13, 303], 3]
+        a_list[:-2]                 # [1, 1, 'a', 2]
+        len(a_list)                 # return the length = 6
 
-  <!-- deck.navigation snippet -->
-  <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
-  <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+        # list manipulation
+        a_list = a_list + [1,2]     # or a_list += [1,2]
+        a_list[2:3] = [3, 4]        # try a_list[2:4] += [3, 4, 5]
 
-  <!-- deck.status snippet -->
-  <p class="deck-status">
-  <span class="deck-status-current"></span>
-  /
-  <span class="deck-status-total"></span>
-  </p>
+        # function call
+        a_list = [1, 2, 5, 6]
+        a_list.pop(2)               # reomves an element from list
+                                    # and return that element
+                                    # default index is the last item
+        a_list.insert('haha')       # insert one element at the front
+        a_list.append("an item")    # append one element at the end
+        a_list.extend([1, 2, 3])    # extend list itself
 
-  <!-- deck.goto snippet -->
-  <form action="." method="get" class="goto-form">
+        # searching in list
+        a_list = list(range(1,20,3))
+        3 in a_list, 4 in a_list
+        a_list(3)                   # an exception is raised if not found
+        a_list(4)                   # retrun the index of first occurence
+    </pre></p>
+</section>
+<section class='slide'>
+    <h3>Demo of Basic Data Structure(cont'd)</h3>
+    <p><pre class='brush: py'>
+        # ----------- Tuple -----------
+        a_tuple = (1, "2", 2.4)     
+        a_tuple[0], a_tuple[-1]     # usage is basically same as list
+        # tuples are not modifiable, always create/return a new tuple
+        a_tuple[1:2]
+        1, 2, [1, 2, 3]             # "," and no "( )" is actually a tuple
+        x, y = 1, 4                 # assigning multible variables together
+
+        1 in a_tuple
+        a_tuple.index("2")
+
+        # ---------- Set -----------
+        a_set = set()           # empty set, {} = empty dict
+        a_set = {1}
+        # convert a list into a set
+        a_set = set([1, 2, 2, 4, 'b', True])           
+        a_set.add(6)            # add new element once
+        a_set.update([1, 3, 6]) # add mutliple elements together
+        len(a_set)
+        a_set.discard()
+
+        # set operation
+        5 in a_set, 3 in a_set
+        b_set = {2, 6, 3, 9}
+        a_set.union(b_set)      
+        a_set.difference(b_set) # for more operation please refer to
+                                # the documetation page
+    </pre></p>
+</section>
+<section class='slide'>
+    <h3>Demo of Basic Data Structure(cont'd)</h3>
+    <p><pre class='brush: py'>
+        # ---------- Dict ----------
+        a_dict = { '1': 2523, '2': 14.3, 2: "156"}
+        b_dict = { 1: 'a',      # new lines are accepted in braces.
+                   2: 'b'}      # such as (), [], {}
+        a_dict['1']
+        a_dict[2]
+        a_dict[3] = 5           # create key automatically
+        if 2 in a_dict:
+            a_dict[2] = 4       # prevent from adding an extra key
+                                # don't use has_key() function
+        a_dict['list'] = [1, 3, 6, 8]           # nested data structure
+        a_dict['a dict'] = {1: '1', 'key': 0}   # can be accepted 
+        a_dict['list'][-1]
+        a_dict['a dict']['key']
+    </pre></p>
+    <ul>
+        <li> 基本上 數字、string、list、dict 即可以滿足日常需求</li>
+        <li> 資料結構決定好的演算法與效能。<br />Ex. list[i] = O(n), dict[i] = amortized O(1)</li>
+    </ul>
+    <h2>Special constant <code>None</code></h2>
+    <p>Something like <code>null</code> in other languages.</p>
+    <p><pre class='brush: py'>
+        type(None)                  # NoneType object
+        [] == None, {} == None      # only variables whose value is None
+        None == None, None is None  # are equal to each other
+        x = None
+        x == None
+    </pre></p>
+</section>
+        
+<section class='slide'>
+    <h2>Truth Value Testing</h2>
+    <p>Any object can be tested for truth value, used in <code>if</code> or <code>while</code> condition and the Boolean operations.</p> 
+    <p>The following values are treated <code>False</code></p>
+    <ul>
+        <li>None, False</li>
+        <li>zero in number datatypes: int, float, complex</li>
+        <li>zero length of data structure: list, dict, tuple, string, set</li>
+    </ul>
+    <p><pre class='brush: py'>
+        for bool_value in [None, False, 0, 0.0, 0j, '', (), [], {}]:
+        if not bool_value:
+            print(bool_value, 'is false')
+        # result
+        None is false
+        False is false
+        0 is false
+        0.0 is false
+        0j is false
+        is false
+        () is false
+        [] is false
+        {} is false
+    </pre></p>
+</section>
+
+<section class='slide'>
+    <h2>Control Flow Tools</h2>
+    <p> 大致上就跟大家的語言都一樣 </p>
+    <ul>
+        <li><code>if ... else ...</code> <br /><code>if ... elif ... elif ... else ...</code></li>
+        <li><code>for ... in ... </code></li>
+        <li><code>while</code></li>
+        <li><code>break</code>, <code>continue</code></li>
+        <li><code>try ... (except ... )* (else ...) (finally ...) </code></li>
+        <li><code>pass</code></li>
+        <li>( Advanced, related to <code>ContextManager</code> ) <br />
+        <code>with ... as ...</code></li>
+    </ul>
+    <p> 有關 syntax 的使用上，有幾點要請大家注意：</p>
+    <ul>
+        <li> 只會用到「:」與「縮排」</li>
+        <li> 判斷式常用的刮號 ()、大刮號 {}；每行分號 ; 皆可加皆不加</li>
+        <li> 一行如果寫太長，可以用「\」來分成兩行，後方不能有空白（不推薦使用 <pre class='brush:py'>
+            if this.line is "an extra long sentence" and \
+                you.could("then do this by adding a '\'"):
+                you.do_sth_here_in_if()     # inside if
+                extra_thing_in_if_here()
+            you.do_sth_out_of_if()  # outside if
+        </pre></li>
+        <li> You will need a good <strong style='color: red'>coding style</strong> !!</li>
+    </ul>
+</section>
+
+<section class='slide'>
+    
+</section>
+<!-- slides end -->
+
+<!-- deck.js start -->
+<!-- Begin extension snippets. Add or remove as needed. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
     <label for="goto-slide">Go to slide:</label>
     <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
     <datalist id="goto-datalist"></datalist>
     <input type="submit" value="Go">
-  </form>
+</form>
 
-  <!-- deck.hash snippet -->
-  <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
-  <!-- End extension snippets. -->
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+<!-- End extension snippets. -->
 
-  <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="lib/deck.js/jquery-1.7.2.min.js"><\/script>')</script>
+<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="lib/deck.js/jquery-1.7.2.min.js"><\/script>')</script>
 
-  <!-- Extension JS files. Add or remove as needed. -->
-  <script src="lib/deck.js/core/deck.core.js"></script>
-  <script src="lib/deck.js/extensions/hash/deck.hash.js"></script>
-  <script src="lib/deck.js/extensions/menu/deck.menu.js"></script>
-  <script src="lib/deck.js/extensions/goto/deck.goto.js"></script>
-  <script src="lib/deck.js/extensions/status/deck.status.js"></script>
-  <script src="lib/deck.js/extensions/navigation/deck.navigation.js"></script>
-  <script src="lib/deck.js/extensions/scale/deck.scale.js"></script>
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="lib/deck.js/core/deck.core.js"></script>
+<script src="lib/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="lib/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="lib/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="lib/deck.js/extensions/status/deck.status.js"></script>
+<script src="lib/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="lib/deck.js/extensions/scale/deck.scale.js"></script>
 
-  <!-- Initialize the deck. You can put this in an external file if desired. -->
-  <script>
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
     $.deck('.slide');
-  </script>
-  <!-- deck.js end -->
+</script>
+<!-- deck.js end -->
 
 </body>
 </html>
