@@ -40,6 +40,9 @@
     </script>
     <style type="text/css">
         .syntaxhighlighter { overflow-y: hidden !important; }
+        strong {
+            color: red;
+        }
     </style>
     <!-- syntaxhighlighter end -->
 </head>
@@ -278,6 +281,7 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         a_list.pop(2)               # reomves an element from list
                                     # and return that element
                                     # default index is the last item
+        del a_list[1]               # delete an element
         a_list.insert('haha')       # insert one element at the front
         a_list.append("an item")    # append one element at the end
         a_list.extend([1, 2, 3])    # extend list itself
@@ -353,31 +357,37 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         x == None
     </pre></p>
 </section>
-        
 <section class='slide'>
     <h2>Truth Value Testing</h2>
-    <p>Any object can be tested for truth value, used in <code>if</code> or <code>while</code> condition and the Boolean operations.</p> 
-    <p>The following values are treated <code>False</code></p>
     <ul>
-        <li>None, False</li>
-        <li>zero in number datatypes: int, float, complex</li>
-        <li>zero length of data structure: list, dict, tuple, string, set</li>
+        <li>Any object can be tested for truth value.</li>
+        <li>Used in <code>if</code> or <code>while</code> condition and the Boolean operations.</li>
+        <li>可以用括號來調整運算次序。</li>
     </ul>
     <p><pre class='brush: py'>
-        for bool_value in [None, False, 0, 0.0, 0j, '', (), [], {}]:
+        >, < , >=, <=   # 一般大小值的比較
+        ==          # 值的比較
+        is          # 比較是否同為一個 object
+        and or not  # 像其他語言的 &&, ||, !
+    </pre></p>
+    <p>(Advanced) operator overloading. <code>__eq__()</code>, <code>__lt__()</code>, <code>__gt__()</code> ... <br /> More on <a href="http://docs.python.org/3/reference/datamodel.html#object.__lt__">@Official</a></p>
+</section>
+<section class='slide'>
+    <h2>The following values are treated <code>False</code></h2>
+    <ul>
+        <li>None, False</li>
+        <li><strong>zero</strong> in number datatypes: int, float, complex</li>
+        <li><strong>zero length</strong> of data structure: list, dict, tuple, string, set</li>
+    </ul>
+    <p><pre class='brush: py'>
+        for bool_value in [None, False,
+                           0, 0.0, 0j, '', 
+                           (), [], {}]:
         if not bool_value:
             print(bool_value, 'is false')
-        # result
-        None is false
-        False is false
-        0 is false
-        0.0 is false
-        0j is false
-        is false
-        () is false
-        [] is false
-        {} is false
-    </pre></p>
+
+        # results are all False
+        </pre></p>
 </section>
 
 <section class='slide'>
@@ -653,6 +663,13 @@ if cond1 or cond2 or cond3:
 
 
 <section class='slide'>
+    <h2>Lambda Function</h2>
+    <p>形式如右：<code>lambda x: f(x)</code></p>
+<p><pre class='brush: py'>
+# BJ4，直接示範
+f = lambda x: x+2   # lambda funtion 定義只能一行一個敘述
+f(2), f(20)         #(4, 22)
+</pre></p>
     <h2>Built-in Functions</h2>
     <p>非常常用的一些函式，直接查官方說明就有很多範例。<a href="http://docs.python.org/3/library/functions.html">@Official</a></p>
     <ul>
@@ -667,24 +684,79 @@ if cond1 or cond2 or cond3:
     </ul>
 </section>
 
+<section class="slide">
+    <h3>Demo for built-in functions</h3>
+<p><pre class='brush: py'>
+# demo_builtin.py
+def test_sort():
+    # test sorted
+    l = ['1', '11', '21', '2', '13', '103']
+    print('befor sorted l =', l)
+    print('sort by string =', sorted(l))
+    print('sort by int =', sorted(l, key=lambda x: int(x)))
+    print('l is not modified after sort.', l)
+
+def demo_print():
+    print(1, 2, 4, 5)       # 會用空白連接多個 arg
+    print(1, end='')        # 不讓 print 換新的一行
+    print(2)
+    print('1' + str(1))     # string + int 要型別轉換
+
+# demo_for.py
+# looping at more than two iterables
+list1 = ['a', 'b', 'c']
+list2 = [1, 4, 6, 7, 8]
+list3 = [1, 4.5, 3.5, 3]
+for i, j, k in zip(list1, list2, list3):
+    #print('i', i, ',j', j, 'k', k)
+    print('i: {:>4s}, j: {:4d}, k: {:4.1f}'.format(i, j, k))
+
+# test range()
+list(range(10))
+list(range(2, 10))
+list(range(1, 27, 3))
+
+# test *(set, list)
+l = [1, 2, 3]
+print(l)    
+print(*l)   # same as print(1, 2, 3)
+
+# use **dict to pass arguments
+arg_d = {'name': 'liang', 'addr': 'Taipei', 'birth': 1991}
+make_profile(**arg_d)   
+# same as make_profile(name='liang', addr='Taipei', birth=1991)
+</pre></p>
+</section>
+
 <section class='slide'>
     <h2>More on String</h2>
     <ul>
-        <li>in fact an immutable object</li>
-        <li>strip(), rstrip(), lstrip()</li>
+        <li>In fact an immutable object <ul>
+            <li>所以每次都是回傳新的 string</li>
+            <li>string 的比較不能用 strA is strB，要用 strA == strB</li>
+            <li>大小比較跟字典一樣，可以直接排序</li>
+        </ul></li>
+        <li>strip(), rstrip(), lstrip() -  把多餘的空白、換行去除</li>
         <li>split(), splitlines()</li>
-        <li>replace(), find(), in</li>
+        <li>replace(), in, find()</li>
         <li>len(), str(), a_string[:]</li>
         <li>lower(), upper(), title()</li>
-        <li>join()</li>
+        <li>join() - 在效能上有優勢</li>
         <li>Formatter</li>
     </ul>
 </section>
-
 <section class="slide">
-    <h2>Lamda function</h2>
-</section>
+    <h3>Demo of string</h3>
+    <p>Combined with the text file <a href="source/Kynes.txt">Kynes.txt</a>.</p>
+<p><pre class="brush: py">
+# using Kynes.txt
+# first do '''...''', splitlines(), strip(), join(), [:] 
+# then do len(), lower(), upper(), title()
+# redo by while '  ' in : replace('  ', ' '), replace '\n'
 
+# Formatter use demo_string.py
+</pre></p>
+</section>
 <section class='slide'>
     <h2>In-line if</h2>
     <p>Powerful tool in Python.</p>
@@ -741,8 +813,10 @@ if __name__ == '__main__':
                  number=100))
 </pre></p>
 </section>
+<section class="slide">
+    <h2>More on <code>import</code></h2>
+</section>
 <section class='slide'>
-    <h2>Lambda Function</h2>
     <h2>Class</h2>
 </section>
 
