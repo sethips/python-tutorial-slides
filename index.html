@@ -52,7 +52,7 @@
 <section class='slide' id='title'>
     <div class = 'vcenter'>
         <h1 style='font-size: 64px'> Python 2+3 Quick Intro in 2 Hours </h1>
-        <p style='margin-top: 30px'> Liang Bo Wang <br /> 2013.01</p>
+        <p style='margin-top: 30px'> Liang Bo Wang <br /><span id="lastedit"></span></p>
     </div>
 </section>
 <section class='slide' id='today'>
@@ -81,8 +81,8 @@
 $ python -V # check python version
 Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
     <ul>
-        <li> V, x 都是大改版，像function, library的調整。可以查官網的change log </li>
-        <li> 相同 V 的 code 都可以向後相容，所以理論上2.5的code在2.7上也可以執行 </li>
+        <li> V, x 都是大改版，像 function, library 的調整。可以查官網的 change log </li>
+        <li> 相同 V 的 code 大致上相容，所以多數 2.5 的 code 在 2.7 上也可以執行，除了那些被 deprecated 的 function 之外</li>
         <li> y 是 bug fix 跟提昇效能 </li>
         <li> V = 2 or 3，是相容性的例外（後述）</li>
     </ul>
@@ -94,9 +94,9 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         <li>把一些舊時代的垃圾清掉，整合 library。 <br /> Ex. urllib, urllib2; popen2(), popen3(), popen4()</li> 
         <li><strong>Syntax</strong> 上的調整。 <br /> Ex. print -> print(), with ... as, list comprehension</li>
         <li>string 原生對 <strong>unicode</strong> 支援</li>
-        <li>2.5 = 3.0, 2.6 = 3.1, 2.7 = 3.2</li>
-        <li>3.3(2012.09) 為全新版本，2.x 不再更新功能</li>
-        <li>建議直接學 3.3，有問題再回到 2.7 </li>
+        <li>2.6 = 3.0, 2.7 = 3.1/3.2</li>
+        <li>3.3( 2012.09 ) 為全新版本，2.x 不再更新功能</li>
+        <li>建議直接學 3.3，有問題再回到 2.7。 再回去寫 2.7 的程式也不會是問題。</li>
     </ul>
     <h3>相對的缺點</h3>
     <ul>
@@ -109,8 +109,8 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
     <ul>
         <li>dynamic typing, intepretion, scipt, OOP</li>
         <li>所以可以很像 Matlab，可以逐行執行/運行腳本</li>
-        <li>變數不用宣告，型別不固定</li>
-        <li>（不過是強型別，不會自動型別轉換）</li>
+        <li>變數不用宣告，動態型別 Dynamically Typed</li>
+        <li>"Explicit is better than implicit"（不過是強型別 Strongly Typed，不會自動型別轉換）</li>
         <li>但他也可以使用 OOP 的方式來寫（萬物皆 object）</li>
     </ul>
     <h3> 執行速度</h3>
@@ -144,6 +144,43 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
 </section>
 <section class="slide">
     <h3>My first Python program</h3>
+<p><pre class="brush: py">
+import os   # load module
+
+
+def getAllPy():                         # function definition
+    py_list = []
+    for f in os.listdir('.'):           # for loop
+        f_name, f_ext = os.path.splitext(f)
+        if f_ext == '.py' and f_name:   # if condition
+            py_list.append(f)
+    return py_list
+
+
+def main_fnt():
+    py_list = getAllPy()    # function call and get return value
+    print('There',          # print() with in-line if
+          'are' if len(py_list) > 1 else 'is',
+          len(py_list),
+          'files' if len(py_list) > 1 else 'file',
+          'in', os.path.realpath(os.path.curdir))
+
+    len_list = []       
+    for f_name in py_list:          # for loop
+        with open(f_name) as f:     # with .. as + file
+            st = f.read()
+            # list comprehesion and string 
+            len_list.append([len(st), len(set(st.split(' ')))])
+
+    print('Total char/word count:')
+    print(', '.join(
+        ['{:10s}: {:4d}/{:d}'.format(f, n[1], n[0])
+         for f, n in zip(py_list, len_list)]))
+
+
+if __name__ == '__main__':
+    main_fnt()
+</pre></p>
 </section>
 <section class='slide'>
     <h2>基本型別 - 1</h2>
@@ -291,6 +328,10 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         3 in a_list, 4 in a_list
         a_list(3)                   # an exception is raised if not found
         a_list(4)                   # retrun the index of first occurence
+        
+        # miscellaneous
+        new_l = l[:]                # the easiest way to copy a list
+
     </pre></p>
 </section>
 <section class='slide'>
@@ -755,11 +796,52 @@ make_profile(**arg_d)
 # redo by while '  ' in : replace('  ', ' '), replace '\n'
 
 # Formatter use demo_string.py
+import datetime, time, random
+
+
+def strDiffTime(d_start, d_end, human=True):
+    delta = d_end - d_start
+
+    if human:
+        time_str = ""
+        if delta.days < 0:
+            print('Negative value when computing time difference of')
+            print('start:', strTime(d_start), 'end:', strTime(d_end))
+            time_str = "-"
+            delta = d_start - d_end
+
+        h = (delta.days * 24) + (delta.seconds // 3600)
+        m = delta.seconds % 3600 // 60
+
+        if h:
+            time_str += "{:0.0f}h".format(h)
+            time_str += "{:0.0f}m".format(m)
+        elif m:
+            time_str += "{:0.0f}m".format(m)
+
+        time_str += "{:0.2f}s".format(delta.seconds % 60 +
+                                      delta.microseconds/1000000)
+        return time_str
+    else:
+        return delta.total_seconds()
+
+def rand_sleep():
+    start = datetime.datetime.today()
+    time.sleep(random.random() * 1.5)
+    end = datetime.datetime.today()
+    print('Random sleep', strDiffTime(start, end))
+
+if __name__ == '__main__':
+    rand_sleep()
 </pre></p>
 </section>
 <section class='slide'>
     <h2>In-line if</h2>
-    <p>Powerful tool in Python.</p>
+    <ul>
+        <li>有時候很方便，可以維持整齊的格式。</li>
+        <li>用法類似英文中放在後面的名詞子句，用來修飾前面的名詞(string)。</li>
+        <li>不過如果用太多的話，有時候會讓敘述變得太複雜，可能就不太好讀。</li>
+    </ul>
 <p><pre class='brush: py'>
 some_dict = {
     'header': this.name,
@@ -767,9 +849,10 @@ some_dict = {
     'index': this.index
     }
 </pre></p>
+<p>修改了先前的例子，讓整個 code 行數變少，不過可能就有點複雜。</p>
 <p><pre class='brush: py'>
-# test_arg_inline.py
-def vari_len_arg_fnt(arg1, *args):
+# test_arg.py
+def vari_len_arg_inline(arg1, *args):
     print('first arg:', arg1)
     affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
     for i, arg_i in enumerate(args):
@@ -781,7 +864,15 @@ def vari_len_arg_fnt(arg1, *args):
     <h2>(List) Comprehension</h2>
     <ul>
         <li>Obtain <strong>best speed</strong> in most cases.</li>
-        <li>In Python 2 people may use map().</li>
+        <li>Syntax: <p><pre class="brush:py">
+            [f(x) for x in list_obj]                # from a list
+            [f(x) for x in list1 if condition]      # inline if accepted
+            [f(k, v) for k, v in dict_obj.items()]  # from a dict
+            [f(x, y) for x in list1 for y in list2] # nested
+        </pre></p></li>
+        <li>Also have Set, Dict Comprehension. </li>
+        <li>(Advanced) This will replace function <code>map()</code>, <code>filter()</code> somehow, which people obtain speend in Python 2.x.</li>
+        <li>Head up! Python will <strong>never copy an object</strong> itself, all is done by <strong>passing-by-name</strong>.</li>
     </ul>
 <p><pre class='brush: py'>
 # demo_list_comprehension.py
@@ -796,35 +887,215 @@ def list_comp():
 
 def list_comp_formatter():
     return ['chr{:d}'.format(i) for i in range(100000)]
-
-if __name__ == '__main__':
-    from timeit import timeit
-    print('Python for loop:',
-          timeit("for_loop()",
-                 setup="from __main__ import for_loop",
-                 number=100))
-    print('List Comprehension:',
-          timeit("list_comp()",
-                 setup="from __main__ import list_comp",
-                 number=100))
-    print('List Comp. with string formatter:',
-          timeit("list_comp_formatter()",
-                 setup="from __main__ import list_comp_formatter",
-                 number=100))
 </pre></p>
 </section>
 <section class="slide">
-    <h2>More on <code>import</code></h2>
+    <h2>Demo of Comprehension</h2>
+    <p>Always keep this in your mind! </p>
+<p><pre class="brush: py">
+# demo_comp.py
+from pprint import pprint
+
+list1 = [chr(i) for i in range(85, 110)]
+list2 = [i for i in list1 if i.isupper()]
+print(list1)
+print(list2)
+
+# replace the normal for loop
+[print(i) for i in list2]   # Py3k only
+
+# one can also used dict comprehension
+d = {k: v for k, v in zip(list1, list2)}
+pprint(d)
+
+# nested, different meaning
+d = {k: v for k in list1 for v in list2}
+pprint(d)
+
+# it is often used together with str.join()
+print(', '.join(['e'+str(i) for i in range(1, 9, 2)]))
+</pre></p>
+</section>
+<section class="slide">
+    <h2>Talk about speed again</h2>
+    <ul>
+        <li>20/80 rule <ul>
+            <li>總執行時間有 80% 時間花在很重要的運算上，20% 則是一些雜事的處理與分析。</li>
+            <li>應該把寫 code 的時間，80% 花在最重要的運算上，20% 處理鳥事。</li>
+            <li>Python 的想法就是盡量把時間拿來寫重要的事，剩下的用內建的函數來處理就好。</li>
+        </ul></li>
+        <li>這邊的討論主要是針對很重要的運算而言</li>
+        <li>回到最初的interpreter上面</li>
+    </ul>
+<p><pre class="brush: bash">
+$ py demo_list_comp.py  # Python 2.7.3
+('Python for loop:', 4.578841924667358)
+('List Comprehension:', 3.3546900749206543)
+('List Comp. with string formatter:', 5.75505805015564)
+
+$ py3 demo_list_comp.py # Python 3.3.0
+Python for loop: 6.7832121060018835
+List Comprehension: 6.136769306001952
+List Comp. with string formatter: 5.403503191999334
+
+$ pypy demo_list_comp.py # pypy 1.9 (= 2.7.1)
+('Python for loop:', 1.4023900032043457)
+('List Comprehension:', 1.1529779434204102)
+('List Comp. with string formatter:', 2.1594371795654297)
+</pre></p>
+</section>
+<section class="slide">
+    <h2>Back on <code>import</code></h2>
+    <p>Something about <code>namespace</code>. more on <a href="http://getpython3.com/diveintopython3/your-first-python-program.html#importsearchpath">@DiveIntoPython3</a></p>
+    <ul>
+        <li><code>from module import functions</code> <br />
+        有時候只要用到 module 的一兩個 function </li>
+        <li><code>import module (as nickname)</code> <br />
+        把整個 module(package) 匯進來</li>
+        <li>(Advanced) module name is a namespace. Class name is also a namespace. 不用硬記，多用幾次就會理解他的概念</li>
+        <li>(Advanced) namespace 的架構也包含了實際上的目錄架構。Ex. dir1/dir2/module will become: <pre class='brush: py'>
+            import dir1.dir2.module
+        </pre></li>
+    </ul>
+<p><pre class="brush: py">
+import os
+import datetime as dt   # 雖然 module 叫 datetime，
+                        # 但匯入時給他一個新的名字 - dt
+
+os.uname()              # 存取 module os 底下的東西
+dt.datetime.today()     # dt = module, 
+                        # datetime = dt 裡的一個 class (help 看來的)
+                        # today() = 這個 class 的一個 function
+print(__name__)         # 判斷現在的名字(namespace)
+                        # 如果是 __main__ 表示是被執行的那個程式
+</pre></p>
+</section>
+
+<section class="slide"
+<p>(continued)</p>
+<p><pre class="brush: py">
+import demo_string
+
+dir(demo_string)        # dir() 可以看到這個 object 的結構
+demo_string.strTime()   # 來呼叫裡面的函式
+from demo_string import strTime     # 直接把這個函式抓到我們現在的名字底下
+
+import os.path as op 
+op.realpath(os.curdir)  # os.path.realpath(os.path.curdir)
+                        # curdir is a attribute of os.path
+                        # (Advanced) don't import same class tree twice
+                        # op = os.path
+
+# --- reload a module ---
+from imp import reload  # necessary for Py3k, in 2.x it is a builtin fnt
+reload(demo_string)     # this module will be reloaded
+                        # if it is imported by from ... import ...
+                        # then it can be reloaded (losing namespace)
+
+# --- Advanced Part ---
+# they are just names :)
+dtdt = dt.datetime
+dtdt.today()
+</pre></p>
+    
 </section>
 <section class='slide'>
-    <h2>Class</h2>
+    <h2>OOP and Class</h2>
+<ul>
+    <li>No public, private, protected decorator. So every function and object is accessible.</li>
+    <li>可以多重繼承</li>
+    <li>instance method, class method, static method</li>
+    <li>More on <a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html">Types and Objects</a> and <a href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html">Attributes and Methods</a></li>
+    <li>我覺得用起來很簡單，但要了解全部的觀念需要一段時間，加上對語言本身的了解。</li>
+</ul>
+</section>
+<section class='slide'>
+<h3>Definition of Classes</h3>
+<p><pre class="brush: py">
+# demo_class.py
+class myFirstClass():
+    X = 'First'
+
+    def __init__(self, i):
+        self.seq = i        # attribute
+
+    def fnt1(self):         # instance method
+        print(self.seq, self.X)
+
+    def fnt2(self):
+        print('Second', self.seq)
+
+    @classmethod
+    def getClsName(cls):    # class method
+        print(cls.__name__, cls.X)
+
+    @staticmethod
+    def indepFnt():         # static method
+        print(1*1)
+
+
+class mySecondClass(myFirstClass):  # inherit from myFirstClass
+    X = 'Second'
+
+    def __init__(self, i):  # overloading
+        super().__init__(i*10)
+        self.son_seq = i
+
+    def fnt2(self):
+        super().fnt2()      # call myFirstClass.fnt2()
+        print('Son', self.son_seq)
+</pre></p>
 </section>
 
+<section class="slide">
+<h3>Use these classes</h3>
+<p><pre class="brush: py">
+import demo_class as dc
+
+def demo():
+    print('--- static, class method requires no object ---')
+    dc.myFirstClass.indepFnt()
+    dc.myFirstClass.getClsName()
+    dc.mySecondClass.getClsName()
+
+    obj1 = dc.myFirstClass(3)
+    obj2 = dc.mySecondClass(7)
+
+    print('--- class method ---')
+    obj1.getClsName()
+    obj2.getClsName()
+
+    print('--- instance method ---')
+    obj1.fnt1()
+    obj2.fnt1()
+
+    obj1.fnt2()
+    obj2.fnt2()
+
+if __name__ == '__main__':
+    demo()
+</pre></p>
+</section>
 
 <section class="slide">
-    reload()
-    import imp
-    imp.reload
+    <h2>What we have left without mention</h2>
+    <p>其實，大部份的語言概念都已經介紹了。如果要更深入了解，可以就要學習Python 運作的方式。至少實務上不一定要很懂。</p>
+    <ul>
+        <li> Exception Handling <br />
+        應該是不難，查說明文件跟 google 就可以上手</li>
+        <li> @decorator <br />
+        有一點點不太好解釋，可能等比較熟練再來學比較好</li>
+        <li> Advanced topics on OOP: operator overloading, ... <br />
+        要花很多時間，實用性也不高，不如等會 live demo 實用的東西</li>
+        <li> Python Library <br />
+        恩…這個我也只會其中幾個而已，等一下來介紹一些</li>
+        <li> Packaging, 2to3 <br /> 
+        這部份我也在學習中…</li>
+    </ul>
+</section>
+
+<section class='slide' id="use-important">
+    <h1 style='color: BlueViolet'>能用比較重要！！</h1>
 </section>
 <!-- slides end -->
 
@@ -870,7 +1141,12 @@ if __name__ == '__main__':
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
     $.deck('.slide');
-</script>
+    var lastDate = new Date(new Date(document.lastModified).getTime()+8*3600*1000);
+    $('#lastedit').html('last edit: ' + lastDate.getFullYear() + '.' + (lastDate.getMonth()+1) + '.' + lastDate.getDate()).css({
+      'font-weight':    'bold',
+      'color':          '#C71585'
+    });
+    </script>
 <!-- deck.js end -->
 
 </body>
