@@ -139,6 +139,9 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         platform.uname()    # function call
     </pre></p>
 </section>
+<section class="slide">
+    <h3>My first Python program</h3>
+</section>
 <section class='slide'>
     <h2>基本型別 - 1</h2>
     <p> Immutable. More on <a href="http://docs.python.org/3/library/stdtypes.html">@Official</a> or <a href="http://getpython3.com/diveintopython3/native-datatypes.html">@DiveIntoPython3</a></p>
@@ -407,20 +410,162 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
 </section>
 
 <section class='slide'>
-    <h2>Demo of <code>If</code></h2>
-    <p><pre class='brush: py'>
-    </pre></p>
+    <h2>Demo of <code>if</code>, <code>pass</code></h2>
+    <p>記得要<span style="color: red">縮排以及冒號</span>，有沒有空行都可以。</p>
+<p><pre class='brush: py'>
+# demo if and nested if
+if year == 2013:
+    print('This year is 2013')
+    if month == 1:
+        print('month is 1')
+    elif month == 2:
+        print('month is 2')
+    else:
+        print('month is other than 1, 2')
+else:
+    print('This year is not 2013')
+</pre></p>
+<p><code>pass</code> is used when one don't know what to do but still need a line for indentaion.</p>
+<p><pre class='brush: py'>
+if x == 1:
+    pass # do nothing or no knowing what to do
+else:
+    blablabla()
+
+# more often cass
+class MyObj:
+    def somefuntion():
+        pass    # may be used for hierarchy
+    def output():
+        return this.output
+</pre></p>
 </section>
-
-<section class='slide'>
-    <h3>Demo of Loops</h3>
+<section class="slide">
+    <h2>Demo of <code>while</code>, <code>try</code></h2>
+<p><pre class='brush: py'>
+# demo if and while
+x = 0
+# an infinite loop
+while True:
+    if x % 2 == 0:
+        print('x is even when x =', x)
+    if x > 10:
+        break
+    x += 1
+print(x)
+</pre></p>
+<p><code>try</code> 用在 Exception catching，用法都很相近</p>
+<p><pre class="brush: py">
+try:
+    # some statements that may raise exception
+    f = open('a_file.txt')
+    content = f.read()
+except IOException as e:
+    # exception case 1
+    pass    # do nothing for this exception
+except ValueError as e:
+    # exception case 2
+    raise e # raise a exception
+else:
+    # if no exception is raised
+    print('Happy to open file')
+finally:
+    f.close()   # one should close a file
+</pre></p>
 </section>
-
-
-<section class='slide'>
-    <h2>Functions</h2>
+<section class="slide">
+    <h2>Python-style For Loop</h2>
     <ul>
-        <li> Parameter passing - <strong style='color: red'>pass by name (reference)</strong></li>
+        <li>Most data structure can be traversed using <code>for ... in data_structure</code></li>
+        <li>Cases: string, list, set, dict, file, range(), enumerate()</li>
+        <li>(Advanced) <code>for</code> loops on a <code>iterable</code> object.<ul>
+            <li>a <code>iterable</code> object implements <code>__iter__()</code>, <code>__next__()</code> and raise exception <code>SoptIteration</code> when no further item remains.</li>
+            <li>functions like range(), enumerate() will return a iterable object so one can used with for loops.</li>
+            <li>list(an_iterable_object) can generate a list.</li>
+            <li>More on <a href="http://docs.python.org/3/tutorial/classes.html#iterators">@Official</a>, <a href="http://docs.python.org/3/library/itertools.html">itertools@Official</a></li>
+        </ul></li>
+    </ul>
+</section>
+<section class='slide'>
+    <h3>Demo for <code>for</code> loops</h3>
+<p><pre class="brush: py">
+# demo_for.py
+def test_for():
+    # loop in list, (set, string are the same)
+    l = [1, 2, 4]
+    for i in l:
+        print(str(i))
+
+    # loop using range()
+    for x in range(10):
+        print('this is', x, 'th time.')
+
+    print(list(range(5)))   # make range into list
+
+    # loop with an index
+    str_l = ['abc', 'def', 'ghi', 'jkl']
+    for i, s in enumerate(str_l):
+        print(i, 'th item is', s)
+        if i == 1:
+            for c in s:
+                print(c)
+
+    # loop in dict
+    my_profile = {'name': 'liang',
+                  'address': 'moon',
+                  'birth': '1991'}
+
+    for k, v in my_profile.items():
+        print('key', k, 'contains', v)
+
+    # loop only key in dict
+    for k in my_profile.keys():
+        print(k)
+
+if __name__ == '__main__':
+    test_for()
+</pre></p>
+</section>
+
+<section class="slide">
+    <h2>File object</h2>
+    <ul>
+        <li><code>open(filename, mode)</code>, more on <a href="http://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">@Official</a></li>
+        <li>filename can be relative path. Ex. ~/liang/sources/test.py, ../test.py</li>
+        <li>mode = 'r' (default), 'w' ,...</li>
+    </ul>
+<p><pre class="brush: py">
+f = open('test.txt')
+context = f.read()  # read all content of f
+
+for line in f:      # or try enumerate(f)
+    print(line)
+
+line_lists = f.readlines()  # read multi lines as a list
+for line in sorted(line_lists):
+    print(line)
+
+f.close()           # remember to close the file
+
+# use with ... as ... to open a file
+# to make sure even an exception has been raised
+# it always closes the file
+
+with open('test.txt') as f:
+    for line in f:
+        print(line)
+
+</pre></p>
+</section>
+
+<section class='slide'>
+    <h2>More on Functions</h2>
+    <ul>
+        <li> Parameter passing - <strong style='color: red'>pass by name (reference)</strong> <ul>
+            <li>For immutable objects (tuple, numbers, bool), it passes by value</li>
+            <li>For mutable objects (custom obj, list, set, dict, ...), it passes by reference</li>
+            <li>If not sure, test yourself!</li>
+        </ul></li>
         <li><code>*args</code>, <code>**argv</code>
         accept variable numbers of arguments </li>
         <li>functions with no return value would return <code>None</code> (null) </li>
@@ -431,7 +576,11 @@ def myfunction(arg1, arg2, arg3=True, arg4=None):
     x = []
     return x
     </pre></p>
-    <p><pre class='brush: py'>
+</section>
+
+<section class='slide'>
+    <h3>Demo of function</h3>
+<p><pre class='brush: py'>
 # test_arg.py
 def vari_len_arg_fnt(arg1, *args):
     print('first arg:', arg1)
@@ -444,8 +593,14 @@ def vari_len_arg_fnt(arg1, *args):
         print(str(i) + affix, 'arg:', arg_i)
 variable_len_arg_fnt('must input', 'after that',
     'I can put', 'as many args', 'as I want', 'YA')
-    </pre></p>
+</pre></p>
+
 </section>
+
+<section class='slide'>
+<h2>Coding Style</h2>
+</section>
+
 
 <section class='slide'>
 <h2>Built-in Functions</h2>
@@ -453,16 +608,16 @@ variable_len_arg_fnt('must input', 'after that',
         <li>sorted()</li>
         <li>min(), max(), abs()</li>
         <li>print()</li>
-    </ul>
-</section>
-
-<section class='slide'>
-    <h2>More on String, File and Iterator</h2>
-    <ul>
         <li>zip()</li>        
         <li>next()</li>
         <li>range()</li>
         <li>enumerate()</li>
+    </ul>
+</section>
+
+<section class='slide'>
+    <h2>More on String, File</h2>
+    <ul>
     </ul>
 </section>
 <section class='slide'>
