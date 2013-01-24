@@ -393,6 +393,9 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         <li>( Advanced, related to <code>ContextManager</code> ) <br />
         <code>with ... as ...</code></li>
     </ul>
+</section>
+<section class="slide">
+    <h2>Control Flow Tools (cont'd)</h2>
     <p> 有關 syntax 的使用上，有幾點要請大家注意：</p>
     <ul>
         <li> 只會用到「:」與「縮排」</li>
@@ -407,8 +410,8 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
             extra_thing_in_if_here()
         you.do_sth_out_of_if()  # outside if
     </pre></p>
-</section>
 
+</section>
 <section class='slide'>
     <h2>Demo of <code>if</code>, <code>pass</code></h2>
     <p>記得要<span style="color: red">縮排以及冒號</span>，有沒有空行都可以。</p>
@@ -489,41 +492,37 @@ finally:
 <section class='slide'>
     <h3>Demo for <code>for</code> loops</h3>
 <p><pre class="brush: py">
-# demo_for.py
-def test_for():
-    # loop in list, (set, string are the same)
-    l = [1, 2, 4]
-    for i in l:
-        print(str(i))
+# more on demo_for.py
+# --- loop in list, (set, string are the same) ---
+l = [1, 2, 4]
+for i in l:
+    print(str(i))
 
-    # loop using range()
-    for x in range(10):
-        print('this is', x, 'th time.')
+# --- loop using range() ---
+for x in range(10):
+    print('this is', x, 'th time.')
 
-    print(list(range(5)))   # make range into list
+print(list(range(5)))   # make range into list
 
-    # loop with an index
-    str_l = ['abc', 'def', 'ghi', 'jkl']
-    for i, s in enumerate(str_l):
-        print(i, 'th item is', s)
-        if i == 1:
-            for c in s:
-                print(c)
+# --- loop with an index ---
+str_l = ['abc', 'def', 'ghi', 'jkl']
+for i, s in enumerate(str_l):
+    print(i, 'th item is', s)
+    if i == 1:
+        for c in s:
+            print(c)
 
-    # loop in dict
-    my_profile = {'name': 'liang',
-                  'address': 'moon',
-                  'birth': '1991'}
+# --- loop in dict ---
+my_profile = {'name': 'liang',
+              'address': 'moon',
+              'birth': '1991'}
 
-    for k, v in my_profile.items():
-        print('key', k, 'contains', v)
+for k, v in my_profile.items():
+    print('key', k, 'contains', v)
 
-    # loop only key in dict
-    for k in my_profile.keys():
-        print(k)
-
-if __name__ == '__main__':
-    test_for()
+# --- loop only key in dict ---
+for k in my_profile.keys():
+    print(k)
 </pre></p>
 </section>
 
@@ -582,44 +581,110 @@ def myfunction(arg1, arg2, arg3=True, arg4=None):
     <h3>Demo of function</h3>
 <p><pre class='brush: py'>
 # test_arg.py
+def keyword_fnt(name, addr, birth, isGirl=True, *args, **argv):
+    print('Getting name:', name)
+    if isGirl:
+        print('mei')
+    else:
+        print('(ry')
+    print('length of args', len(args))
+    print('length of argv', len(argv))
+    vari_len_arg_fnt(None, args)
+    vari_arg_dict_fnt(argv)
+
 def vari_len_arg_fnt(arg1, *args):
-    print('first arg:', arg1)
-    affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
-    for i, arg_i in enumerate(args):
-        if i not in affix_dict:
-            affix = 'th'
-        else:
-            affix = affix_dict[i]
-        print(str(i) + affix, 'arg:', arg_i)
-variable_len_arg_fnt('must input', 'after that',
-    'I can put', 'as many args', 'as I want', 'YA')
+    print('first arg:', arg1)
+    affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
+    for i, arg_i in enumerate(args):
+        if i not in affix_dict:
+            affix = 'th'
+        else:
+            affix = affix_dict[i]
+        print(str(i) + affix, 'arg:', arg_i)
+
+def vari_arg_dict_fnt(arg1=None, **argv):
+    if not arg1:
+        print('no arg1 given')
+    else:
+        print(arg1)
+    for k, v in argv.items():
+        print(k, v)
+
+def test():
+    # test these functions
+    vari_len_arg_fnt('a must input', 'after that', 'I can put',
+                     'as many args', 'as I want', 'YA')
+
+def test_keyword():
+    keyword_fnt('liang', 'Taipei', '1991', 'adsf', 'qwef', key=2)
+    keyword_fnt('liang', 'Taipei', '1991', False, 'adsf', 'qwef', key=2)
+    keyword_fnt('liang', 'Taipei', '1991', 'adsf', 'qwef',
+                isGirl=False, key=2)
+
+if __name__ == '__main__':
+    test()
+    test_keyword()
 </pre></p>
 
 </section>
 
 <section class='slide'>
-<h2>Coding Style</h2>
+<h2>Coding Style and Philosophy</h2>
+<ul>
+    <li>tab = 4 spaces</li>
+    <li>盡量用簡單、明確的方法</li>
+    <li>如果敘述太長的話就寫成多行以上</li>
+    <li>more on <a href="http://www.python.org/dev/peps/pep-0008/">PEP8</a>, <a href="http://www.python.org/dev/peps/pep-0020/">PEP20</a>, <a href="https://python-guide.readthedocs.org/en/latest/writing/style/">@HitchHiker's Guide</a></li>
+</ul>
+
+<p><pre class="brush: py">
+# dirty code
+if there.is_a_extra_long or ( too_many.condtions() and nested_statments  in a_if ) or many_many_statements.in_a_line():
+    # inside if
+
+# clearer
+cond1 = there.is_a_extra_long
+cond2 = too_many.conditions() and nested_statements in a_if
+cond3 = many_many_statements.in_a_line()
+if cond1 or cond2 or cond3:
+    # inside if
+</pre></p>
 </section>
 
 
 <section class='slide'>
-<h2>Built-in Functions</h2>
+    <h2>Built-in Functions</h2>
+    <p>非常常用的一些函式，直接查官方說明就有很多範例。<a href="http://docs.python.org/3/library/functions.html">@Official</a></p>
     <ul>
-        <li>sorted()</li>
+        <li>help(function) - 關於那個 function 的說明</li>
+        <li>sorted() - 排序並回傳一個新的 list，可以用 key=lambda x: f(x)</li>
         <li>min(), max(), abs()</li>
         <li>print()</li>
-        <li>zip()</li>        
-        <li>next()</li>
-        <li>range()</li>
-        <li>enumerate()</li>
+        <li>zip() - 把多個 iterable 串在一起</li>        
+        <li>range() - 生成一個數列</li>
+        <li>enumerate() - 把數列跟一個iterable合在一起</li>
+        <li>*(list, set, tuple), **dict - 展開資料結構</li>
     </ul>
 </section>
 
 <section class='slide'>
-    <h2>More on String, File</h2>
+    <h2>More on String</h2>
     <ul>
+        <li>in fact an immutable object</li>
+        <li>strip(), rstrip(), lstrip()</li>
+        <li>split(), splitlines()</li>
+        <li>replace(), find(), in</li>
+        <li>len(), str(), a_string[:]</li>
+        <li>lower(), upper(), title()</li>
+        <li>join()</li>
+        <li>Formatter</li>
     </ul>
 </section>
+
+<section class="slide">
+    <h2>Lamda function</h2>
+</section>
+
 <section class='slide'>
     <h2>In-line if</h2>
     <p>Powerful tool in Python.</p>
@@ -681,6 +746,12 @@ if __name__ == '__main__':
     <h2>Class</h2>
 </section>
 
+
+<section class="slide">
+    reload()
+    import imp
+    imp.reload
+</section>
 <!-- slides end -->
 
 <!-- deck.js start -->

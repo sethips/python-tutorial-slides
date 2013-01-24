@@ -33,5 +33,13 @@ def test_for():
     for k in my_profile.keys():
         print(k)
 
+    # looping at more than two iterables
+    list1 = ['a', 'b', 'c']
+    list2 = [1, 4, 6, 7, 8]
+    list3 = [1, 4.5, 3.5, 3]
+    for i, j, k in zip(list1, list2, list3):
+        #print('i', i, ',j', j, 'k', k)
+        print('i: {:>4s}, j: {:4d}, k: {:4.1f}'.format(i, j, k))
+
 if __name__ == '__main__':
     test_for()
