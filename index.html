@@ -44,6 +44,20 @@
             color: red;
         }
     </style>
+    <style type="text/css">
+            @media screen {
+            @font-face {
+            font-family: 'CC-ICONS';
+            font-style: normal;
+            font-weight: normal;
+            src: url('http://mirrors.creativecommons.org/presskit/cc-icons.ttf') format('truetype');
+            }
+            
+            span.cc {
+            font-family: 'CC-ICONS';
+            }
+            }
+        </style>
     <!-- syntaxhighlighter end -->
 </head>
 
@@ -53,7 +67,21 @@
     <div class = 'vcenter'>
         <h1 style='font-size: 64px'> Python 2+3 Quick Intro in 2 Hours </h1>
         <p style='margin-top: 30px'> Liang Bo Wang <br /><span id="lastedit"></span></p>
+
+        <p style='font-size: 12px'> <span class="cc" style='font-size: 60px'>c b</span> <br/>Except where otherwise noted, content on this site is licensed <br />under a <a href='http://creativecommons.org/licenses/by/3.0/'>Creative Commons Attribution 3.0 License</a>.</p>
     </div>
+</section>
+<section class='slide' id="diy">
+    <h2>如果要自學</h2>
+    <ul>
+        <li>個人當初的學習方式：拿本參考書 ( ex. Learning Python ) 來讀，再來念官方的教學文件（<a href="http://docs.python.org/3/">此</a>）</li>
+        <li>如果不太熟 coding，可以從 <a href="http://learnpythonthehardway.org/">Learn Python the Hard Way</a> 開始看起（較淺顯）</li>
+        <li>有程式經驗的可以從 <a href="http://getpython3.com/diveintopython3/">Dive into Python 3</a> 開始看起，有問題的再 google 即可。</li>
+        <li><a href="http://docs.python-guide.org/en/latest/">The Hitchhiker's Guide to Python</a> 整理了非常多 Python 的相關資源與使用經驗（還再編修中，hot）</li>
+        <li><a href="http://www.pythontutor.com/">Online Python Tutor</a> 是一個幫助使用者了解 Python 運作機制的網站。</li>
+        <li>喜歡互動式學習的可以參考 <a href="http://www.codecademy.com/tracks/python">@Codecademy</a></li>
+        <li>中文的話推薦<a href="http://caterpillar.onlyfun.net/Gossip/Python/index.html"> @良葛格的學習筆記</a></li>
+    </ul>
 </section>
 <section class='slide' id='today'>
     <h2>今天</h2>
@@ -63,11 +91,13 @@
         <li> 盡量用舉例的 </li>
         <li> live demo = life demo，掛在台上請見諒 </li>
         <li> 可以會有點中英交雜… </li>
-        <li> 已經把 2.7.3, 3.3.0 安裝在 171, 173 上面，等一下可以直接操作</li>
+    </ul>
+    <h2>給使用投影片的各位</h2>
+        <li> 可能要找個讀本來配合著看，這邊只有寫出怎麼使用 </li>
+        <li> 相關的程式碼在<a href="https://github.com/ccwang002/python-tutorial-slides/tree/gh-pages/source">此</a></li>
     </ul>
 </section>
-
-<section class='slide'>
+<section class='slide' id="intro">
     <h2>Python 簡介</h2>
     <ul>
         <li> 詳見 <a href='http://zh.wikipedia.org/zh-tw/Python'>Wiki</a></li>
@@ -88,7 +118,7 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
     </ul>
 </section>
 
-<section class='slide'>
+<section class='slide' id="py3k">
     <h2>Python 3 (Py3k)</h2>
     <ul>
         <li>把一些舊時代的垃圾清掉，整合 library。 <br /> Ex. urllib, urllib2; popen2(), popen3(), popen4()</li> 
@@ -104,7 +134,7 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         <li>效能差於 2.7.3 </li>
     </ul>
 </section>
-<section class='slide'>
+<section class='slide' id='more-lang'>
     <h2> 語言介紹</h2>
     <ul>
         <li>dynamic typing, intepretion, scipt, OOP</li>
@@ -126,7 +156,7 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
     </ul>
     <center><h3 style='color: red'> 立馬來 demo !! </h3></center>
 </section>
-<section class='slide'>
+<section class='slide' id='use-demo'>
     <h3> Demo 兩種操作方式 </h3>
     <p>1. Interactive mode<pre class='brush: bash'>
         $ python3           # or ipython3
@@ -142,7 +172,7 @@ Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
         platform.uname()    # function call
     </pre></p>
 </section>
-<section class="slide">
+<section class="slide" id='first-prog'>
     <h3>My first Python program</h3>
 <p><pre class="brush: py">
 import os   # load module
@@ -182,14 +212,14 @@ if __name__ == '__main__':
     main_fnt()
 </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id="basic-type-1">
     <h2>基本型別 - 1</h2>
     <p> Immutable. More on <a href="http://docs.python.org/3/library/stdtypes.html">@Official</a> or <a href="http://getpython3.com/diveintopython3/native-datatypes.html">@DiveIntoPython3</a></p>
     <ul>
         <li>Boolean: <code>True</code>, <code>False</code>. </li>
         <li>Strings: <ul>
             <li>Unicode</li>
-            <li>s = '...' or "..."</li>
+            <li>s = '...' or "..." or multi-lines '''...'''</li>
             <li>s = str(many datatypes)</li>
             <li>之後會專門介紹</li>
         </ul></li>
@@ -212,7 +242,7 @@ if __name__ == '__main__':
         </ul></li>
     </ul>
 </section>
-<section class='slide'>
+<section class='slide' id="basic-type-demo-1">
     <h3>Demo of Boolean, Numbers, and String</h3>
     <p><pre class='brush: py'>
         # Bool
@@ -222,6 +252,10 @@ if __name__ == '__main__':
         # String
         x = "我是unicode"       # accept both ' ', " "
         x == '我是unicode'      # string value comparison
+        x = "'aa'\t"
+        x = """ eeee
+        eeee
+        eee"""
         'ab' < 'abc'
         'a' + "ccc", 'a'*8
 
@@ -255,7 +289,7 @@ if __name__ == '__main__':
         1 / 0                   # raise Exception ZeroDivisionError
     </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id="basic-type-2">
     <h2>基本型別 - 2</h2>
     <p> Mutable data structure</p>
     <ul>
@@ -288,7 +322,7 @@ if __name__ == '__main__':
         t = (n1, n2, n3)            # a tuple
     </pre>
 </section>
-<section class='slide'>
+<section class='slide' id="basic-type-demo-2">
     <h3>Demo of Basic Datatypes:</h3>
     <p><pre class='brush:py'>
         # ----------- list ----------
@@ -334,7 +368,7 @@ if __name__ == '__main__':
 
     </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id="basic-type-demo-2-contd">
     <h3>Demo of Basic Data Structure(cont'd)</h3>
     <p><pre class='brush: py'>
         # ----------- Tuple -----------
@@ -366,7 +400,7 @@ if __name__ == '__main__':
                                 # the documetation page
     </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id="basic-type-none">
     <h3>Demo of Basic Data Structure(cont'd)</h3>
     <p><pre class='brush: py'>
         # ---------- Dict ----------
@@ -398,7 +432,7 @@ if __name__ == '__main__':
         x == None
     </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id="truth-value-bool">
     <h2>Truth Value Testing</h2>
     <ul>
         <li>Any object can be tested for truth value.</li>
@@ -413,7 +447,7 @@ if __name__ == '__main__':
     </pre></p>
     <p>(Advanced) operator overloading. <code>__eq__()</code>, <code>__lt__()</code>, <code>__gt__()</code> ... <br /> More on <a href="http://docs.python.org/3/reference/datamodel.html#object.__lt__">@Official</a></p>
 </section>
-<section class='slide'>
+<section class='slide' id="false-value">
     <h2>The following values are treated <code>False</code></h2>
     <ul>
         <li>None, False</li>
@@ -431,7 +465,7 @@ if __name__ == '__main__':
         </pre></p>
 </section>
 
-<section class='slide'>
+<section class='slide' id="control">
     <h2>Control Flow Tools</h2>
     <p> 大致上就跟大家的語言都一樣 <a href="http://docs.python.org/3/tutorial/controlflow.html">@Official</a> </p>
     <ul>
@@ -445,7 +479,7 @@ if __name__ == '__main__':
         <code>with ... as ...</code></li>
     </ul>
 </section>
-<section class="slide">
+<section class="slide" id="control-contd">
     <h2>Control Flow Tools (cont'd)</h2>
     <p> 有關 syntax 的使用上，有幾點要請大家注意：</p>
     <ul>
@@ -463,7 +497,7 @@ if __name__ == '__main__':
     </pre></p>
 
 </section>
-<section class='slide'>
+<section class='slide' id="control-demo-1">
     <h2>Demo of <code>if</code>, <code>pass</code></h2>
     <p>記得要<span style="color: red">縮排以及冒號</span>，有沒有空行都可以。</p>
 <p><pre class='brush: py'>
@@ -494,7 +528,7 @@ class MyObj:
         return this.output
 </pre></p>
 </section>
-<section class="slide">
+<section class="slide" id="control-demo-2">
     <h2>Demo of <code>while</code>, <code>try</code></h2>
 <p><pre class='brush: py'>
 # demo if and while
@@ -527,7 +561,7 @@ finally:
     f.close()   # one should close a file
 </pre></p>
 </section>
-<section class="slide">
+<section class="slide" id="for-loop">
     <h2>Python-style For Loop</h2>
     <ul>
         <li>Most data structure can be traversed using <code>for ... in data_structure</code></li>
@@ -540,7 +574,7 @@ finally:
         </ul></li>
     </ul>
 </section>
-<section class='slide'>
+<section class='slide' id="for-loop-demo">
     <h3>Demo for <code>for</code> loops</h3>
 <p><pre class="brush: py">
 # more on demo_for.py
@@ -577,7 +611,7 @@ for k in my_profile.keys():
 </pre></p>
 </section>
 
-<section class="slide">
+<section class="slide" id='file'>
     <h2>File object</h2>
     <ul>
         <li><code>open(filename, mode)</code>, more on <a href="http://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">@Official</a></li>
@@ -608,7 +642,7 @@ with open('test.txt') as f:
 </pre></p>
 </section>
 
-<section class='slide'>
+<section class='slide' id='more-function'>
     <h2>More on Functions</h2>
     <ul>
         <li> Parameter passing - <strong style='color: red'>pass by name (reference)</strong> <ul>
@@ -628,7 +662,7 @@ def myfunction(arg1, arg2, arg3=True, arg4=None):
     </pre></p>
 </section>
 
-<section class='slide'>
+<section class='slide' id="more-fnt-demo">
     <h3>Demo of function</h3>
 <p><pre class='brush: py'>
 # test_arg.py
@@ -679,7 +713,7 @@ if __name__ == '__main__':
 
 </section>
 
-<section class='slide'>
+<section class='slide' id="code-style">
 <h2>Coding Style and Philosophy</h2>
 <ul>
     <li>tab = 4 spaces</li>
@@ -688,7 +722,7 @@ if __name__ == '__main__':
     <li>more on <a href="http://www.python.org/dev/peps/pep-0008/">PEP8</a>, <a href="http://www.python.org/dev/peps/pep-0020/">PEP20</a>, <a href="https://python-guide.readthedocs.org/en/latest/writing/style/">@HitchHiker's Guide</a></li>
 </ul>
 
-<p><pre class="brush: py">
+<p><pre class="brush: py" id="code-style-demo">
 # dirty code
 if there.is_a_extra_long or ( too_many.condtions() and nested_statments  in a_if ) or many_many_statements.in_a_line():
     # inside if
@@ -703,7 +737,7 @@ if cond1 or cond2 or cond3:
 </section>
 
 
-<section class='slide'>
+<section class='slide' id='lambda-builtin'>
     <h2>Lambda Function</h2>
     <p>形式如右：<code>lambda x: f(x)</code></p>
 <p><pre class='brush: py'>
@@ -725,7 +759,7 @@ f(2), f(20)         #(4, 22)
     </ul>
 </section>
 
-<section class="slide">
+<section class="slide" id='builtin-demo'>
     <h3>Demo for built-in functions</h3>
 <p><pre class='brush: py'>
 # demo_builtin.py
@@ -769,7 +803,7 @@ make_profile(**arg_d)
 </pre></p>
 </section>
 
-<section class='slide'>
+<section class='slide' id='string'>
     <h2>More on String</h2>
     <ul>
         <li>In fact an immutable object <ul>
@@ -786,7 +820,7 @@ make_profile(**arg_d)
         <li>Formatter</li>
     </ul>
 </section>
-<section class="slide">
+<section class="slide" id='string-demo'>
     <h3>Demo of string</h3>
     <p>Combined with the text file <a href="source/Kynes.txt">Kynes.txt</a>.</p>
 <p><pre class="brush: py">
@@ -835,7 +869,7 @@ if __name__ == '__main__':
     rand_sleep()
 </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id='inline-if'>
     <h2>In-line if</h2>
     <ul>
         <li>有時候很方便，可以維持整齊的格式。</li>
@@ -860,7 +894,7 @@ def vari_len_arg_inline(arg1, *args):
               'arg:', arg_i)
 </pre></p>
 </section>
-<section class='slide'>
+<section class='slide' id='comprehension'>
     <h2>(List) Comprehension</h2>
     <ul>
         <li>Obtain <strong>best speed</strong> in most cases.</li>
@@ -889,7 +923,7 @@ def list_comp_formatter():
     return ['chr{:d}'.format(i) for i in range(100000)]
 </pre></p>
 </section>
-<section class="slide">
+<section class="slide" id='comp-demo'>
     <h2>Demo of Comprehension</h2>
     <p>Always keep this in your mind! </p>
 <p><pre class="brush: py">
@@ -916,7 +950,7 @@ pprint(d)
 print(', '.join(['e'+str(i) for i in range(1, 9, 2)]))
 </pre></p>
 </section>
-<section class="slide">
+<section class="slide" id='speed-intrepreter'>
     <h2>Talk about speed again</h2>
     <ul>
         <li>20/80 rule <ul>
@@ -944,7 +978,7 @@ $ pypy demo_list_comp.py # pypy 1.9 (= 2.7.1)
 ('List Comp. with string formatter:', 2.1594371795654297)
 </pre></p>
 </section>
-<section class="slide">
+<section class="slide" id='import'>
     <h2>Back on <code>import</code></h2>
     <p>Something about <code>namespace</code>. more on <a href="http://getpython3.com/diveintopython3/your-first-python-program.html#importsearchpath">@DiveIntoPython3</a></p>
     <ul>
@@ -971,7 +1005,7 @@ print(__name__)         # 判斷現在的名字(namespace)
 </pre></p>
 </section>
 
-<section class="slide"
+<section class="slide" id='import-demo'>
 <p>(continued)</p>
 <p><pre class="brush: py">
 import demo_string
@@ -999,7 +1033,7 @@ dtdt.today()
 </pre></p>
     
 </section>
-<section class='slide'>
+<section class='slide' id='oop'>
     <h2>OOP and Class</h2>
 <ul>
     <li>No public, private, protected decorator. So every function and object is accessible.</li>
@@ -1009,7 +1043,7 @@ dtdt.today()
     <li>我覺得用起來很簡單，但要了解全部的觀念需要一段時間，加上對語言本身的了解。</li>
 </ul>
 </section>
-<section class='slide'>
+<section class='slide' id='oop-demo-class'>
 <h3>Definition of Classes</h3>
 <p><pre class="brush: py">
 # demo_class.py
@@ -1047,7 +1081,7 @@ class mySecondClass(myFirstClass):  # inherit from myFirstClass
 </pre></p>
 </section>
 
-<section class="slide">
+<section class="slide" id='oop-demo-fnt'>
 <h3>Use these classes</h3>
 <p><pre class="brush: py">
 import demo_class as dc
@@ -1077,7 +1111,7 @@ if __name__ == '__main__':
 </pre></p>
 </section>
 
-<section class="slide">
+<section class="slide" id='remain'>
     <h2>What we have left without mention</h2>
     <p>其實，大部份的語言概念都已經介紹了。如果要更深入了解，可以就要學習Python 運作的方式。至少實務上不一定要很懂。</p>
     <ul>
@@ -1085,18 +1119,66 @@ if __name__ == '__main__':
         應該是不難，查說明文件跟 google 就可以上手</li>
         <li> @decorator <br />
         有一點點不太好解釋，可能等比較熟練再來學比較好</li>
-        <li> Advanced topics on OOP: operator overloading, ... <br />
+        <li> Advanced topics on OOP: operator overloading, generator, ... <br />
         要花很多時間，實用性也不高，不如等會 live demo 實用的東西</li>
-        <li> Python Library <br />
+        <li> Python Standard Library <br />
         恩…這個我也只會其中幾個而已，等一下來介紹一些</li>
-        <li> Packaging, 2to3 <br /> 
+        <li> (Distributing) Package, 2to3, ... <br /> 
         這部份我也在學習中…</li>
+        <li>Python/C API <br />
+        可以調用外部的 C, C++ 程式碼</li>
     </ul>
 </section>
 
 <section class='slide' id="use-important">
-    <h1 style='color: BlueViolet'>能用比較重要！！</h1>
+    <h1 style='color: DeepPink'>能用比較重要！！</h1>
 </section>
+
+<section class="slide" id='lib'>
+    <h2>Python Standard Library</h2>
+    <h4><code>os, sys, platform</code></h4>
+    <ul>
+      <li>跟系統相關，版本、跨平台的資訊</li>
+      <li>檔案系統的操作：複製、移動、連結</li>
+      <li>os.uname(), platform.platform(), sys.path</li>
+      <li>os.chdir(), os.getcwd(), os.makedirs(), os.rename(), os.remove(), </li>
+      <li>os.walk(), os.listdir(), glob.glob()</li>
+    </ul>
+    <h4><code>os.path</code></h4>
+    <ul>
+      <li>跟檔案路徑有關</li>
+      <li>realpath(), abspath(), dirname(), basename(), splitext(), join(), curdir</li>
+      <li>isdir(), isfile(), islink(), exists()</li>
+    </ul>
+</section>
+<section class='slide' id='lib-2'>
+    <h4><code>re</code></h4>
+    <ul>
+      <li>Regular Expression</li>
+      <li>compile(), search(), match()</li>
+      <li>re.MULTILINE</li>
+      <li>group(), group_dict()</li>
+    </ul>
+    <h4><code>time, datetime</code></h4>
+    <h4><code>csv</code></h4>
+    <h4><code>argparse</code></h4>
+    <h2>Summary - Standard Library</h2>
+    <ul>
+        <li>基本上各種應用都有相對應的 package 可以使用，我對網路、GUI(tkinter)這部份不是很常用。</li>
+        <li>More on <a href="http://docs.python.org/3/library/index.html">Library@Official</a></li>
+    </ul>
+</section>
+
+<section class="slide" id="package">
+    <h2>3rd-Party Package</h2>
+    <ul>
+        <li>我們可以將寫好的 module 打包成一個 package ，就可以讓大家來使用</li>
+        <li>跟 Perl 的 CPAN 一樣， Python 有一個管理 package 的網站 <a href="http://pypi.python.org/pypi">PyPI</a> </li>
+        <li>利用 <code>pip</code>, <code>easy_install</code> 方法來安裝</li>
+        <li>More on <a href="http://docs.python-guide.org/en/latest/#scenario-guide">Scenario Guide@The Hitchhiker's Guide to Python</a></li>
+    </ul>
+</section>
+
 <!-- slides end -->
 
 <!-- deck.js start -->
@@ -1142,7 +1224,7 @@ if __name__ == '__main__':
 <script>
     $.deck('.slide');
     var lastDate = new Date(new Date(document.lastModified).getTime()+8*3600*1000);
-    $('#lastedit').html('last edit: ' + lastDate.getFullYear() + '.' + (lastDate.getMonth()+1) + '.' + lastDate.getDate()).css({
+    $('#lastedit').html('Last edit: ' + lastDate.getFullYear() + '.' + (lastDate.getMonth()+1) + '.' + lastDate.getDate()).css({
       'font-weight':    'bold',
       'color':          '#C71585'
     });
