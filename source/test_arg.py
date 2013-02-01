@@ -48,7 +48,8 @@ def test_keyword():
     keyword_fnt('liang', 'Taipei', '1991', 'adsf', 'qwef', key=2)
     keyword_fnt('liang', 'Taipei', '1991', False, 'adsf', 'qwef', key=2)
     keyword_fnt('liang', 'Taipei', '1991', 'adsf', 'qwef',
-                isGirl=False, key=2)
+                isGirl=False, key=2)    # case RUNTIME error
+    # mind the order of arguments
 
 if __name__ == '__main__':
     test()

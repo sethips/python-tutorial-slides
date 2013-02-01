@@ -28,7 +28,8 @@ def main_fnt():
     print('Total char/word count:')
     print(', '.join(
         ['{:10s}: {:4d}/{:d}'.format(f, n[1], n[0])
-         for f, n in zip(py_list, len_list)]))
+         for f, n in zip(py_list, len_list)]
+    ))
 
 
 if __name__ == '__main__':
