@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <title>Python Tutorial</title>
+
+    <!-- deck.js start -->
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" href="lib/deck.js/core/deck.core.css">
+
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" href="lib/deck.js/extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/status/deck.status.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/hash/deck.hash.css">
+    <link rel="stylesheet" href="lib/deck.js/extensions/scale/deck.scale.css">
+
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" href="lib/deck.js/themes/style/swiss.css">
+
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" href="lib/deck.js/themes/transition/horizontal-slide.css">
+
+    <!-- Required Modernizr file -->
+    <script src="lib/deck.js/modernizr.custom.js"></script>
+    <!-- deck.js end -->
+
+    <!-- syntaxhighlighter start -->
+    <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="lib/syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <link type="text/css" rel="stylesheet" href="lib/syntaxhighlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    </script>
+    <style type="text/css">
+        .syntaxhighlighter { overflow-y: hidden !important; }
+        strong {
+            color: red;
+        }
+    </style>
+    <style type="text/css">
+            @media screen {
+            @font-face {
+            font-family: 'CC-ICONS';
+            font-style: normal;
+            font-weight: normal;
+            src: url('http://mirrors.creativecommons.org/presskit/cc-icons.ttf') format('truetype');
+            }
+            
+            span.cc {
+            font-family: 'CC-ICONS';
+            }
+            }
+        </style>
+    <!-- syntaxhighlighter end -->
+</head>
+
+<body class="deck-container">
+<!-- slides start -->
+<section class='slide' id='title'>
+    <div class = 'vcenter'>
+        <h1 style='font-size: 64px'> Python 2+3 Quick Intro in 2 Hours </h1>
+        <p style='margin-top: 30px'> Liang Bo Wang <br /><span id="lastedit"></span></p>
+
+        <p style='font-size: 12px'> <span class="cc" style='font-size: 60px'>c b</span> <br/>Except where otherwise noted, content on this site is licensed <br />under a <a href='http://creativecommons.org/licenses/by/3.0/'>Creative Commons Attribution 3.0 License</a>.</p>
+    </div>
+</section>
+<section class='slide' id="diy">
+    <h2>如果要自學</h2>
+    <ul>
+        <li>個人當初的學習方式：拿本參考書 ( ex. Learning Python, Python Cookbook ) 來讀，再來念<a href="http://docs.python.org/3/">官方的教學文件</a></li>
+        <li>如果不太熟 coding，可以從 <a href="http://learnpythonthehardway.org/">Learn Python the Hard Way</a> 開始看起（較淺顯）</li>
+        <li>有程式經驗的可以從 <a href="http://getpython3.com/diveintopython3/">Dive into Python 3</a> 開始看起，有問題的再 google 即可。</li>
+        <li>中文的話推薦<a ref="http://openhome.cc/Gossip/Python/"> @良葛格的學習筆記</a></li>
+        <li><a href="http://docs.python-guide.org/en/latest/">The Hitchhiker's Guide to Python</a> 整理了非常多 Python 的相關資源與使用經驗（內容還在補全中，但值得一看）</li>
+        <li>喜歡互動式學習的可以參考 <a href="http://www.codecademy.com/tracks/python">@Codecademy</a></li>
+        <li><a href="http://jessenoller.com/good-to-great-python-reads/">Jesse Noller</a> 整理了網路上相當不錯的教學文件，對許多基本觀念作釋疑並提出比較 Pythonic solution</li>
+        <li><a href="http://www.pythontutor.com/">Online Python Tutor</a> 是一個幫助了解 Python 運作機制的網站。</li>
+
+    </ul>
+</section>
+<section class='slide' id='today'>
+    <h2>給使用投影片的各位</h2>
+        <li> 可能要找個讀本來配合著看，這邊只有寫出怎麼使用 </li>
+        <li> 不會談技術細節 </li>
+        <li> 也不會講到很細的運作流程（但值得花時間看）</li>
+        <li> 盡量用舉例的 </li>
+        <li> 相關的程式碼在<a href="https://github.com/ccwang002/python-tutorial-slides/tree/gh-pages/source">此</a></li>
+    </ul>
+</section>
+<section class='slide' id="intro">
+    <h2>Python 簡介</h2>
+    <ul>
+        <li> 詳見 <a href='http://zh.wikipedia.org/zh-tw/Python'>Wiki</a></li>
+        <li> 國外還蠻多人用的，套件非常多 </li>
+        <li> 好學，開發速度快，簡潔整齊code，跨平台 </li>
+        <li> 官方網站的教學寫得很好，不唬爛 </li> 
+        <li> 標準套件強大 </li>
+    </ul>
+    <h3>版本命名方式</h3>
+    <p><pre class='brush: bash'>
+$ python -V # check python version
+Python V.x.y # Ex. 3.3.0 or 2.7.3</pre></p>
+    <ul>
+        <li> V, x 都是大改版，像 function, library 的調整。可以查官網的 change log </li>
+        <li> 相同 V 的 code 大致上相容，所以多數 2.5 的 code 在 2.7 上也可以執行，除了那些被 deprecated 的 function 之外</li>
+        <li> y 是 bug fix 跟提昇效能 </li>
+        <li> V = 2 or 3，是相容性的例外（後述）</li>
+    </ul>
+</section>
+
+<section class='slide' id="py3k">
+    <h2>Python 3 (Py3k)</h2>
+    <ul>
+        <li>把一些舊時代的垃圾清掉，整合 library。 <br /> Ex. urllib, urllib2; popen2() - popen4()</li> 
+        <li><strong>Syntax</strong> 上的調整。 <br /> Ex. print -> print(), with ... as, list / dict comprehension extended, __name__</li>
+        <li>string 原生對 <strong>unicode</strong> 支援</li>
+        <li>3.3(2012.09) 為全新版本，2.x 不再更新功能（2.7 為最後版本）</li>
+        <li>建議直接學寫 Py3（再考慮2的相容性）。有問題再回去寫 Py2 的程式也不會是問題。</li>
+        <li><a href="http://getpython3.com/">getpython3.com</a> 整理許多有關 Py3 的資源</li>
+    </ul>
+    <h3>相對的缺點</h3>
+    <ul>
+        <li>有些套件還沒相容（停止開發、大套件），但這是趨勢且大部份都已經相容。</li>
+        <li>效能差於 2.7.3 </li>        
+    </ul>
+</section>
+<section class='slide' id='more-lang'>
+    <h2> 語言介紹</h2>
+    <ul>
+        <li>dynamic typing, intepretion, scipt, OOP</li>
+        <li>所以可以很像 Matlab，可以逐行執行/運行腳本</li>
+        <li>變數不用宣告，動態型別 Dynamically Typed</li>
+        <li>但他也可以使用 OOP 的方式來寫（萬物皆 object）</li>
+    </ul>
+    <h3> 執行速度</h3>
+    <ul>
+        <li>跨平台的關系，不會直接把原始碼編譯成機器碼</li>
+        <li>會動態的把 python script 轉換成機器碼</li>
+        <li>官方的版本以 C 實作 (CPython)</li>
+        <li>使用內建的函式即是呼叫對應的 C code，會用 C 的速度來執行</li>
+        <li>如果是自己寫的函式的話，則就會用 python 的速度來執行，一般來說相差大約30倍</li>
+        <li>原則：盡量用現有的函式來兜（兜的方法之後會介紹）</li>
+        <li>(Adv.)Faster by JIT Compiler: <a href="http://pypy.org/">pypy</a>
+        <br />a Python intepreter for Python with 30% up faster</li>
+    </ul>
+    <center><h3 style='color: red'> 立馬來 demo !! </h3></center>
+</section>
+<section class='slide' id='use-demo'>
+    <h3> Demo 兩種操作方式 </h3>
+    <p>1. Interactive mode<pre class='brush: bash'>
+        $ python3           # or ipython3
+        >>> print('Hello World')
+        >>> import platform
+        >>> platform, print # everything is an object
+        >>> type(platform)  # get object type by function type()
+        >>> dir(paltform)   # view object attributes
+        >>> platform.uname()  # call a function of platform</pre></p>
+    <p>2. Execute from file<pre class='brush: py'>
+        print('Hello World')
+        import platform     # way to import a std library
+        platform.uname()    # function call
+        x = '1'             # type(x) is a string now, no declaration
+        len(x)              # access built-in fnt of str
+        x = 1               # now type(x) becomes integer
+        len(1)              # RUNTIME ERROR! no len() for type int object
+    </pre></p>
+</section>
+<section class="slide" id='first-prog'>
+    <h3>My first Python program</h3>
+<p><pre class="brush: py">
+import os   # load module
+
+
+def getAllPy():                         # function definition
+    py_list = []
+    for f in os.listdir('.'):           # for loop
+        f_name, f_ext = os.path.splitext(f)
+        if f_ext == '.py' and f_name:   # if condition
+            py_list.append(f)           # list modification
+    return py_list        # return value of a function
+
+
+def main_fnt():
+    py_list = getAllPy()    # function call and get return value
+    print('There',          # print() with in-line if
+          'are' if len(py_list) > 1 else 'is',
+          len(py_list),
+          'files' if len(py_list) > 1 else 'file',
+          'in', os.path.realpath(os.path.curdir))
+
+    len_list = []       
+    for f_name in py_list:          # for loop
+        with open(f_name) as f:     # with .. as + file
+            st = f.read()           # read file
+            # nested list [[], [], [], ...]
+            len_list.append([len(st), len(set(st.split(' ')))])
+
+    print('Total char/word count:')
+    print(', '.join(
+        # list comprehesion and string         
+        ['{:10s}: {:4d}/{:d}'.format(f, n[1], n[0]) 
+         for f, n in zip(py_list, len_list)]
+        ))
+
+# load all of the script file and run the funtion
+# if this py file is called directly
+if __name__ == '__main__':
+    main_fnt()
+</pre></p>
+</section>
+<section class='slide' id="basic-type-1">
+    <h2>基本型別 - 1</h2>
+    <p> Immutable. More on <a href="http://docs.python.org/3/library/stdtypes.html">@Official</a> or <a href="http://getpython3.com/diveintopython3/native-datatypes.html">@DiveIntoPython3</a></p>
+    <ul>
+        <li>Boolean: <code>True</code>, <code>False</code>. </li>
+        <li>Strings: <ul>
+            <li>Unicode</li>
+            <li>s = '...' or "..." or multi-lines '''...'''</li>
+            <li>s = str(many datatypes)</li>
+        </ul></li>
+        <li>Numbers:<ul>
+            <li>整數 <code>int</code>
+            n = 1, 2, 3, ...</li>
+            <li>小數 <code>float</code>
+            f = 1.2, 3.444, 5.2321141, ...</li>
+            <li>虛數 <code>complex</code>
+            c = 1+2j, c.real, c.imag</li>
+            <li>分數 <code>Fraction</code> in package <code>fractions</code>
+            r = fraction.Fraction(2,5)</li>
+            <li>常見運算：
+            int(), float(), *, /, //, %, **</li>
+        </ul></li>
+        <li>File and Iterator: 之後再講</li>
+    </ul>
+</section>
+<section class='slide' id="basic-type-demo-1">
+    <h3>Demo of Boolean, Numbers, and String</h3>
+    <p><pre class='brush: py'>
+        # -- Bool --
+        x = True
+        type(x)
+
+        # -- String --
+        x = "我是unicode"       # accept both ' ', " "
+        x == '我是unicode'      # string value comparison
+        x = "'aa'\t"            # ' is fine inside ", reversely also.
+        x = """ eeee
+        eeee
+        eee"""
+        'ab' < 'abc'
+        'a' + "ccc", 'a'*8
+        x[1], x[-3], x[1:-3]    # select substr by index
+    </pre></p>
+</section>
+
+<section class='slide' id="basic-type-demo-1c">
+    <h3>Demo of Boolean, Numbers, and String (cont'd)</h3>
+    <p><pre class='brush: py'>
+        # -- Numbers --
+        # basic operation of numbers
+        8 / 4, 3 / 4, 5.0 / 2.0   # different behavior for int in 2.x
+        5 // 2, 6.0 // 2.4        # a = p(//) q + r(%)
+        5 % 2, 6 % 3
+        2 * 3, 1 + 1j * 1 - 1j
+        4 ** 3                    # in C/Java, 4^3
+
+        # manipulation of numbers
+        f = 1 + 2.0
+        f.is_integer()          # try f = 1 + 2.5
+        int(f)                  # change type into int
+        str(f)                  # convert to string
+        round(f)
+
+        # more math function
+        import math         
+        math.ceil(f)
+        math.floor(f)
+        math.tan(math.pi / 4)   # float has not infinite accuracy
+        1 / 0                   # raise Exception ZeroDivisionError
+    </pre></p>
+</section>
+<section class='slide' id="basic-type-2">
+    <h2>基本型別 - 2</h2>
+    <p> Mutable data structure</p>
+    <ul>
+        <li>List <code>list</code><ul>
+            <li> ordered sequential items, array of variable length </li>
+            <li> implemented using link list, just like vector in C++ STL.</li>
+        </ul></li>
+        <li>Dictionary <code>dict</code><ul>
+            <li> unordered key-value pairs data strcture. Has a hash table for keys. </li>
+            <li> key is unique </li>
+        </ul></li>
+        <li>Set <code>set</code><ul>
+            <li>unodered unique values of immutable datatype. Use hash table.</li>
+            <li>像數學中的集合</li>
+        </ul></li>
+    </ul>
+    <pre class='brush: py'>
+        l = [n1, n2, n3]           # a list
+        d = {k1:v1, k2:v2, k3:v3}  # a dict
+        s = {i1, i2, i3}           # a set
+    </pre>
+</section>
+<section class='slide' id="basic-type-3">
+    <h2>基本型別 - 3</h2>
+    <p>Immutable data structure</p>
+    <ul>
+        <li>Tuple <code>tuple</code> <ul>
+            <li>cannot be changed once created.</li>
+            <li>used as passing parameters, data protection, and key of dict </li>
+        </ul></li>
+    </ul>
+    <pre class='brush: py'>
+        t = (n1, n2, n3)            # a tuple
+    </pre>
+</section>
+<section class='slide' id="basic-type-demo-2">
+    <h3>Demo of Basic Datatypes:</h3>
+    <p><pre class='brush:py'>
+        # ----------- list ----------
+        # accept all different types in a same list
+        a_list = [1, 3, 'a', "qwef", [13, 303], (1, 2)]    
+
+        # use list as array, for both assignment and getting value
+        a_list[0], a_list[4][1]     # (1, 303)
+        a_list[-1]                  # accept negative index
+        a_list[1:3]                 # a range of index [start, end)
+        # if a range is not feasible it returns []
+        a_list[1:-1], a_list[-1:1]  
+        a_list[1:6:2]               # step=2 is accepted
+        a_list[1:6:2] = [1, 2, 3]   # one can do assignment 
+                                    # [1, 1, 'a', 2, [13, 303], 3]
+        # blank can be treated as to end or from start
+        a_list[2:]                  # ['a', 2, [13, 303], 3]
+        a_list[:-2]                 # [1, 1, 'a', 2]
+        len(a_list)                 # return the length = 6
+
+        # list manipulation
+        a_list = a_list + [1,2]     # or a_list += [1,2]
+        a_list[2:3] = [3, 4]        # try a_list[2:4] += [3, 4, 5]
+
+    </pre></p>
+</section>
+<section class='slide' id="basic-type-demo-2c">
+    <h3>Demo of Basic Datatypes (cont'd):</h3>
+    <p><pre class='brush:py'>
+        # function call
+        a_list = [1, 2, 5, 6]
+        a_list.pop(2)               # reomves an element from list
+                                    # and return that element
+                                    # default index is the last item
+        del a_list[1]               # delete an element
+        a_list.insert('haha')       # insert one element at the front
+        a_list.append("an item")    # append one element at the end
+        a_list.extend([1, 2, 3])    # extend list itself, input can be 
+                                    # another list or an iterable
+
+        # searching in list
+        a_list = list(range(1,20,3))
+        3 in a_list, 4 in a_list    # False, True
+        
+        # miscellaneous
+        new_l = l[:]                # the easiest way to copy a list
+
+    </pre></p>
+</section>
+<section class='slide' id="basic-type-demo-2cc">
+    <h3>Demo of Basic Data Structure(cont'd)</h3>
+    <p><pre class='brush: py'>
+        # ----------- Tuple -----------
+        a_tuple = (1, "2", 2.4)     
+        a_tuple[0], a_tuple[-1]     # usage is basically same as list
+        # tuples are not modifiable, always create/return a new tuple
+        a_tuple[1:2]
+        1, 2, [1, 2, 3]             # "," and no "( )" is actually a tuple
+        x, y = 1, 4                 # assigning multible variables together
+
+        1 in a_tuple
+        a_tuple.index("2")
+
+        # ---------- Set -----------
+        a_set = set()           # empty set, {} = empty dict
+        a_set = {1}
+        # convert a list into a set (can be an iterable also)
+        a_set = set([1, 2, 2, 4, 'b', True])           
+        a_set.add(6)            # add new element once
+        a_set.update([1, 3, 6]) # add mutliple elements together
+        len(a_set)
+        a_set.discard()         # clean the content of set
+
+        # set operation
+        5 in a_set, 3 in a_set
+        b_set = {2, 6, 3, 9}
+        a_set.union(b_set)      
+        a_set.difference(b_set) # for more operation please refer to
+                                # the documetation page
+    </pre></p>
+</section>
+<section class='slide' id="basic-type-none">
+    <h3>Demo of Basic Data Structure(cont'd)</h3>
+    <p><pre class='brush: py'>
+        # ---------- Dict ----------
+        a_dict = {'1': 2523, '2': 14.3, 2: "156"}
+        b_dict = {1: 'a',       # new lines are accepted in braces.
+                  2: 'b'}       # such as (), [], {}
+        a_dict['1']             # give key return value
+        a_dict[2]
+        a_dict[3] = 5           # create key automatically
+        if 2 in a_dict:
+            a_dict[2] = 4       # prevent from adding an extra key
+                                # don't use has_key() function
+        a_dict.keys()           # get all existed keys in a dict
+        a_dict.items()          # get all (key, value) tuples in a dict
+
+        # nested data structure
+        a_dict['list'] = [1, 3, 6, 8]
+        a_dict['a dict'] = {1: '1', 'key': 0}   # a 'dict' value can be accepted 
+        a_dict['list'][-1]      # first return a list, then access the index of the list
+        a_dict['a dict']['key']
+    </pre></p>
+    <ul>
+        <li> 基本上，數字、string、list、dict 即可以滿足日常需求</li>
+        <li> 資料結構決定好的演算法與效能。<br />Ex. list[i] = O(n), dict[i] = amortized O(1)</li>
+    </ul>
+</section>
+<section class='slide' id="none-true-testing">
+  <h2>Special constant <code>None</code></h2>
+    <p>Something like <code>null</code> in other languages.</p>
+    <p><pre class='brush: py'>
+        type(None)                  # NoneType object
+        [] == None, {} == None      # only variables whose value is None
+        None == None, None is None  # are equal to each other 
+        x = None
+        x == None                   # 'is None' is preferred
+    </pre></p>
+    <h2>Truth Value Testing</h2>
+    <ul>
+        <li>Any object can be tested for truth value, used in <code>if</code> or <code>while</code> condition and the Boolean operations.</li>
+        <li>可以用括號來調整運算次序。</li>
+    </ul>
+    <p><pre class='brush: py'>
+        >, < , >=, <=   # 一般大小值的比較
+        ==          # 值的比較
+        is          # 比較是否同為一個 object
+        and or not  # 像其他語言的 &&, ||, !
+    </pre></p>
+    <p>(Adv.) operator overloading for custom class. <code>__eq__()</code>, <code>__lt__()</code>, <code>__gt__()</code> ... . More on <a href="http://docs.python.org/3/reference/datamodel.html#object.__lt__">@Official</a></p>
+</section>
+<section class='slide' id="false-value">
+    <h2>The following values are treated <code>False</code></h2>
+    <ul>
+        <li>None, False</li>
+        <li><strong>zero</strong> in numeric datatypes: <code>int</code>, <code>float</code>, <code>complex</code></li>
+        <li><strong>zero length</strong> of data structure: <code>list</code>, <code>dict</code>, <code>tuple</code>, <code>string</code>, <code>set</code></li>
+    </ul>
+<p><pre class='brush: py'>
+for bool_value in [None, False,     # trivial
+                   0, 0.0, 0j, '',  # zero
+                   (), [], {}]:     # zero length (empty)
+    if not bool_value:
+        print(bool_value, 'is false')   # results are all False
+</pre></p>
+</section>
+
+<section class='slide' id="control">
+    <h2>Control Flow Tools</h2>
+    <p> 大致上就跟大家的語言都一樣 <a href="http://docs.python.org/3/tutorial/controlflow.html">@Official</a> </p>
+    <ul>
+        <li><code>if ... else ...</code> <br /><code>if ... elif ... elif ... else ...</code></li>
+        <li><code>for ... in ... </code></li>
+        <li><code>while</code></li>
+        <li><code>break</code>, <code>continue</code></li>
+        <li><code>try ... (except ... )* (else ...) (finally ...) </code></li>
+        <li><code>pass</code></li>
+        <li>( Adv. <code>ContextManager</code> ) <code>with ... as ...</code></li>
+    </ul>
+</section>
+<section class='slide' id="control-demo-1">
+    <h2>Demo of <code>if</code> and <code>pass</code></h2>
+    <p>記得要<span style="color: red">縮排以及冒號</span>，有沒有空行都可以。</p>
+<p><pre class='brush: py'>
+# demo if and nested if
+if year == 2013:
+    print('This year is 2013')
+    if month == 1:
+        print('month is 1')
+    elif month == 2:
+        print('month is 2')
+    else:
+        print('month is other than 1, 2')
+else:
+    print('This year is not 2013')
+</pre></p>
+<p><code>pass</code> is used when one don't know what to do but still need a line for indentaion.</p>
+<p><pre class='brush: py'>
+if x == 1:
+    pass # do nothing or no knowing what to do
+else:
+    blablabla()
+
+# more often case
+class MyObj:
+    def somefuntion():
+        pass    # may be used for hierarchy
+    def output():
+        return this._output
+</pre></p>
+</section>
+<section class="slide" id="control-contd">
+    <h2>Control Flow Tools (cont'd)</h2>
+    <p> 有關 syntax 的使用上，有幾點要請大家注意：</p>
+    <ul>
+        <li> 只會用到「:」與「縮排」。用縮排的位置來判斷敘述句是否被包含著。</li>
+        <li> 縮排可用 tab 或 空白，但同一文件要統一。空白慣用 4個。</li>
+        <li> 判斷式常用的刮號 ()、大刮號 {}、每行分號 ; 皆可加皆不加</li>
+        <li> 一行如果寫太長，可以用「\」來分成兩行，後方不能有空白（不推薦使用）</li>
+        <li> You will need a good <strong style='color: red'>coding style</strong> !!</li>
+    </ul>
+<p><pre class='brush:py'>
+if this.line == "an extra long sentence" and \
+    you.could("then do this by adding a '\'"):
+    you.do_sth_here_in_if()     # inside if
+    extra_thing_in_if_here()
+you.do_sth_out_of_if()  # outside if
+</pre></p>
+</section>
+<section class="slide" id="control-demo-2">
+    <h2>Demo of <code>while</code>, <code>try</code></h2>
+<p><pre class='brush: py'>
+# demo if and while
+x = 0
+# an infinite loop
+while True:
+    if x % 2 == 0:
+        print('x is even when x =', x)
+    if x > 10:
+        break
+    x += 1
+print(x)
+</pre></p>
+<p><code>try</code> 用在 Exception catching，用法都很相近</p>
+<p><pre class="brush: py">
+try:
+    # some statements that may raise exception
+    f = open('a_file.txt')
+    content = f.read()
+except IOException as e:
+    # exception case 1
+    pass    # do nothing for this exception
+except ValueError as e:
+    # exception case 2
+    raise e # raise a exception
+else:
+    # if no exception is raised
+    print('Happy to open file')
+finally:
+    f.close()   # one should close a file
+</pre></p>
+</section>
+<section class="slide" id="for-loop">
+    <h2>Python-style For Loop</h2>
+    <ul>
+        <li>Most data structure can be traversed using <code>for ... in data_structure</code></li>
+        <li>Cases: string, list, set, dict, file, range( ), enumerate( )</li>
+        <li>(Adv.) <code>for</code> loops on a <code>iterable</code> object.<ul>
+            <li>an <code>iterable</code> object implements functions <code>__iter__()</code> and <code>__next__()</code>, and raises exception <code>SoptIteration</code> when no further item remains.</li>
+            <li>functions like range( ), enumerate( ) will return a iterable object so one can used with for loops.</li>
+            <li>list(an_iterable) generates a list, set(an_iterable) creates a set using items in an_iterable.</li>
+            <li>More on <a href="http://docs.python.org/3/tutorial/classes.html#iterators">@Official</a>, <a href="http://docs.python.org/3/library/itertools.html">itertools@Official</a></li>
+        </ul></li>
+    </ul>
+</section>
+<section class='slide' id="for-loop-demo">
+    <h3>Demo for <code>for</code> loops</h3>
+<p><pre class="brush: py">
+# more on demo_for.py
+# --- loop in list, (set, string are the same) ---
+mylist = [1, 2, 4]
+for i in mylist:
+    print(str(i))
+
+# --- loop using range() ---
+for x in range(10):
+    print('this is', str(x), 'th time.')
+
+print(list(range(5)))   # make range into list
+
+# --- loop with an index ---
+str_l = ['abc', 'def', 'ghi', 'jkl']
+for i, s in enumerate(str_l):
+    print(i, 'th item is', s)
+    if i == 1:
+        for c in s:
+            print(c)
+
+# --- loop in dict ---
+my_profile = {'name': 'liang',
+              'address': 'moon',
+              'birth': '1991'}
+
+# (key, value) tuple in dict
+for k, v in my_profile.items():
+    print('key', k, 'contains', v)
+
+# only key in dict
+for k in my_profile.keys():
+    print(k)
+</pre></p>
+</section>
+
+<section class="slide" id='file'>
+    <h2>File object</h2>
+    <ul>
+        <li><code>open(filename, mode)</code>, more on <a href="http://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">@Official</a></li>
+        <li>filename can be relative path. Ex. ./source/test.py, ../test.py</li>
+        <li>mode = 'r' (default) means read-only, 'w' means to create the file, ...</li>
+    </ul>
+<p><pre class="brush: py">
+f = open('test.txt')  # equivalent to open('test.txt', 'r')
+context = f.read()    # read all content of f
+
+for line in f:        # also try enumerate(f)
+    print(line)
+
+line_lists = f.readlines()  # read multi lines as a list
+for line in sorted(line_lists):
+    print(line)
+
+f.close()           # remember to close the file
+
+# use with ... as ... to open a file
+# to make sure even an exception has been raised
+# it always closes the file
+
+with open('test.txt') as f:
+    for line in f:
+        print(line)
+
+</pre></p>
+</section>
+
+<section class='slide' id='more-function'>
+    <h2>More on Functions</h2>
+    <ul>
+        <li> Parameter passing - <strong style='color: red'>pass by name (reference)</strong> <ul>
+            <li>For immutable objects (tuple, numbers, bool), it passes by value</li>
+            <li>For mutable objects (custom obj, list, set, dict, ...), it passes by reference</li>
+            <li>If not sure, test yourself!</li>
+        </ul></li>
+        <li>functions with no return value would return <code>None</code> automatically.</li>
+        <li>if nothing to do (but why would you do so), add a <code>pass</code> for correct indentation. </li>
+         <li><code>*args</code>, <code>**argv</code> accept variable numbers of arguments </li>
+    </ul>
+    <p><pre class='brush: py'>
+def myfunction(arg1, arg2, arg3=True, arg4=None):
+    # do something or put a 'pass' here ...
+    x = []
+    return x
+    </pre></p>
+</section>
+
+<section class='slide' id="more-fnt-demo">
+    <h3>Demo of function</h3>
+<p><pre class='brush: py'>
+# test_arg.py
+def keyword_fnt(name, addr, birth, isGirl=True, *args, **argv):
+    print('Getting name:', name)
+    if isGirl:
+        print('mei')
+    else:
+        print('(ry')
+    print('length of args', len(args))
+    print('length of argv', len(argv))
+    vari_len_arg_fnt(None, args)
+    vari_arg_dict_fnt(argv)
+
+def vari_len_arg_fnt(arg1, *args):
+    print('first arg:', arg1)
+    affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
+    for i, arg_i in enumerate(args):
+        if i not in affix_dict:
+            affix = 'th'
+        else:
+            affix = affix_dict[i]
+        print(str(i) + affix, 'arg:', arg_i)
+
+def vari_arg_dict_fnt(arg1=None, **argv):
+    if not arg1:
+        print('no arg1 given')
+    else:
+        print(arg1)
+    for k, v in argv.items():
+        print(k, v)
+
+def test():
+    # test these functions
+    vari_len_arg_fnt('a must input', 'after that', 'I can put',
+                     'as many args', 'as I want', 'YA')
+
+def test_keyword():
+    keyword_fnt('liang', 'Taipei', '1991', 'adsf', 'qwef', key=2)
+    keyword_fnt('liang', 'Taipei', '1991', False, 'adsf', 'qwef', key=2)
+    keyword_fnt('liang', 'Taipei', '1991', 'adsf', 'qwef',
+                isGirl=False, key=2)  # cause RUNTIME Error
+
+if __name__ == '__main__':
+    test()
+    test_keyword()
+</pre></p>
+
+</section>
+
+<section class='slide' id="code-style">
+<h2>Coding Style and Philosophy</h2>
+<ul>
+    <li>tab = 4 spaces</li>
+    <li>盡量用簡單、明確的方法</li>
+    <li>如果敘述太長的話就寫成多行以上</li>
+    <li>more on <a href="http://www.python.org/dev/peps/pep-0008/">PEP8</a>, <a href="http://www.python.org/dev/peps/pep-0020/">PEP20</a>, <a href="https://python-guide.readthedocs.org/en/latest/writing/style/">@HitchHiker's Guide</a></li>
+</ul>
+
+<p><pre class="brush: py" id="code-style-demo">
+# dirty code
+if there.is_a_extra_long or ( too_many.condtions() and nested_statments  in a_if ) or many_many_statements.in_a_line():
+    # statements inside if
+
+# clearer
+cond1 = there.is_a_extra_long
+cond2 = too_many.conditions() and nested_statements in a_if
+cond3 = many_many_statements.in_a_line()
+if cond1 or cond2 or cond3:
+    # statements inside if
+</pre></p>
+</section>
+
+
+<section class='slide' id='lambda-builtin'>
+    <h2>Lambda Function</h2>
+    <p>形式如右：<code>lambda x: f(x)</code></p>
+<p><pre class='brush: py'>
+# BJ4，直接示範
+f = lambda x: x+2   # lambda funtion 定義只能一個敘述（一口氣）
+f(2), f(20)         #(4, 22)
+sum = lambda x, y: print('sum', x+y)  # multiple arguments are acceptable
+sum(1, 3), sum(3, 5)
+</pre></p>
+    <h2>Built-in Functions</h2>
+    <p>非常常用的一些函式，直接查官方說明就有很多範例。<a href="http://docs.python.org/3/library/functions.html">@Official</a></p>
+    <ul>
+        <li>help(function) - 關於那個 function 的說明</li>
+        <li>sorted() - 排序並回傳一個新的 list，可以用 key=lambda x: f(x)</li>
+        <li>min(), max(), abs()</li>
+        <li>print()</li>
+        <li>zip() - 把多個 iterable 串在一起</li>        
+        <li>range() - 生成一個數列</li>
+        <li>enumerate() - 把數列跟一個iterable合在一起</li>
+        <li>*(list, set, tuple), **dict - 展開資料結構</li>
+    </ul>
+</section>
+
+<section class="slide" id='builtin-demo'>
+    <h3>Demo for built-in functions</h3>
+<p><pre class='brush: py'>
+# demo_builtin.py
+def test_sort():
+    # test sorted
+    l = ['1', '11', '21', '2', '13', '103']
+    print('befor sorted l =', l)
+    print('sort by string =', sorted(l))
+    print('sort by int =', sorted(l, key=lambda x: int(x)))
+    print('l is not modified after sort.', l)
+
+def demo_print():
+    print(1, 2, 4, 5)       # 會用空白連接多個 arg
+    print(1, end='')        # 不讓 print 換新的一行
+    print(2)
+    print('1' + str(1))     # string + int 要型別轉換
+
+# demo_for.py
+# looping at more than two iterables
+list1 = ['a', 'b', 'c']
+list2 = [1, 4, 6, 7, 8]
+list3 = [1, 4.5, 3.5, 3]
+for i, j, k in zip(list1, list2, list3):
+    #print('i', i, ',j', j, 'k', k)
+    print('i: {:>4s}, j: {:4d}, k: {:4.1f}'.format(i, j, k))
+
+# test range()
+list(range(10))
+list(range(2, 10))
+list(range(1, 27, 3))
+
+# test *(set, list, tuple)
+l = [1, 2, 3]
+print(l)    
+print(*l)   # same as print(1, 2, 3)
+
+# use **dict to pass arguments
+arg_d = {'name': 'liang', 'addr': 'Taipei', 'birth': 1991}
+keyword_fnt(**arg_d)   
+# same as keyword_fnt(name='liang', addr='Taipei', birth=1991)
+</pre></p>
+</section>
+<section class="slide" id='builtin-demo2'>
+<h3>More advanced demo</h3>
+<p><pre class="brush: py">
+# advanced zip
+l = list(range(12))
+for tup in zip(*[iter(l)]*3):
+    print(tup)
+
+# advanced print
+print(*l, sep=')-(')     # upack l and combined using sep other than ' '
+print(*l, sep=')-(', file=open('l_dump.txt', 'w'))
+</pre></p>
+</section>
+<section class='slide' id='string'>
+    <h2>More on String</h2>
+    <ul>
+        <li>In fact an immutable object <ul>
+            <li>所以每次都是回傳新的 string</li>
+            <li>string 的比較不能用 strA is strB，要用 strA == strB</li>
+            <li>大小比較跟字典一樣，可以直接排序</li>
+        </ul></li>
+        <li>strip(), rstrip(), lstrip() -  把多餘的空白、換行去除</li>
+        <li>split(), splitlines()</li>
+        <li>replace(), in, find(), startswith(), endswith()</li>
+        <li>len(), str(), a_string[:]</li>
+        <li>lower(), upper(), title()</li>
+        <li>join() - 在效能上有優勢</li>
+        <li>Formatter <ul>
+          <li>Formatter is a string itself</li>
+          <li>{:s}, {:d}, {:f}</li>
+        </ul></li>
+    </ul>
+</section>
+<section class="slide" id="string-demo">
+  <h3>More string usage</h3>
+<p><pre class='brush: py'>
+# formatter
+'{0}, {2}, {1}'.format(1, 2, 3)
+"HP: {:05d}".format(1)
+"MP: {:+05d}".format(1)
+"MP: {:+05d}".format(-1)
+"{:15s}".format('lala')
+"{:<15s}".format('lala')
+"{:>15s}".format('lala')
+"{:+^15s}".format('lala')
+
+# join
+' '.join(['lala', 'tintin', 'elele'])
+
+# index manipulation
+s = 'abcdefgh'
+s[1], s[1:], s[-1]  # same as list
+</pre></p>
+</section>
+<section class="slide" id='string-demo2'>
+    <h3>Full sample using string</h3>
+    <p>Combined with the text file <a href="source/Kynes.txt">Kynes.txt</a>.</p>
+<p><pre class="brush: py">
+# using Kynes.txt
+# first do '''...''', splitlines(), strip(), join(), [:] 
+# then do len(), lower(), upper(), title()
+# redo by while '  ' in : replace('  ', ' '), replace '\n'
+
+# Formatter use demo_string.py
+import datetime, time, random
+
+
+def strDiffTime(d_start, d_end, human=True):
+    delta = d_end - d_start
+
+    if human:
+        time_str = ""
+        if delta.days < 0:
+            print('Negative value when computing time difference of')
+            print('start:', strTime(d_start), 'end:', strTime(d_end))
+            time_str = "-"
+            delta = d_start - d_end
+
+        h = (delta.days * 24) + (delta.seconds // 3600)
+        m = delta.seconds % 3600 // 60
+
+        if h:
+            time_str += "{:0.0f}h".format(h)
+            time_str += "{:0.0f}m".format(m)
+        elif m:
+            time_str += "{:0.0f}m".format(m)
+
+        time_str += "{:0.2f}s".format(delta.seconds % 60 +
+                                      delta.microseconds/1000000)
+        return time_str
+    else:
+        return delta.total_seconds()
+
+def rand_sleep():
+    start = datetime.datetime.today()
+    time.sleep(random.random() * 1.5)
+    end = datetime.datetime.today()
+    print('Random sleep', strDiffTime(start, end))
+
+if __name__ == '__main__':
+    rand_sleep()
+</pre></p>
+</section>
+<section class='slide' id='inline-if'>
+    <h2>In-line if</h2>
+    <ul>
+        <li>有時候很方便，可以維持整齊的格式。</li>
+        <li>用法類似英文中放在後面的名詞子句，用來修飾前面的名詞(string)。</li>
+        <li>不過如果用太多的話，有時候會讓敘述變得太複雜，可能就不太好讀。</li>
+    </ul>
+<p><pre class='brush: py'>
+some_dict = {
+    'header': this.name,
+    'body': this.content if this.content else "No BODY",
+    'index': this.index
+    }
+</pre></p>
+<p>修改了先前的例子，讓整個 code 行數變少，不過可能就有點複雜。</p>
+<p><pre class='brush: py'>
+# test_arg.py
+def vari_len_arg_inline(arg1, *args):
+    print('first arg:', arg1)
+    affix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
+    for i, arg_i in enumerate(args):
+        print(str(i) + ('th' if i not in affix_dict else affix_dict[i]),
+              'arg:', arg_i)
+</pre></p>
+</section>
+<section class='slide' id='comprehension'>
+    <h2>(List) Comprehension</h2>
+    <ul>
+        <li>Obtain <strong>best speed</strong> in most cases.</li>
+        <li>Syntax: <p><pre class="brush:py">
+            [f(x) for x in list_obj]                # from a list
+            [f(x) for x in list1 if condition]      # inline if accepted
+            [f(k, v) for k, v in dict_obj.items()]  # from a dict
+            [f(x, y) for x in list1 for y in list2] # nested
+        </pre></p></li>
+        <li>Also have Set, Dict Comprehension. </li>
+        <li>(Advanced) This will replace function <code>map()</code>, <code>filter()</code> somehow, which people obtain speend in Python 2.x.</li>
+        <li>Head up! Python will <strong>never copy an object</strong> itself, all is done by <strong>passing-by-name</strong>.</li>
+    </ul>
+<p><pre class='brush: py'>
+# demo_list_comprehension.py
+def for_loop():
+    x = []
+    for i in range(100000):
+        x.append('chr' + str(i))
+    return x
+
+def list_comp():
+    return ['chr' + str(i) for i in range(100000)]
+
+def list_comp_formatter():
+    return ['chr{:d}'.format(i) for i in range(100000)]
+</pre></p>
+</section>
+<section class="slide" id='comp-demo'>
+    <h2>Demo of Comprehension</h2>
+    <p>Always keep this in your mind! </p>
+<p><pre class="brush: py">
+# demo_comp.py
+from pprint import pprint
+
+list1 = [chr(i) for i in range(85, 110)]
+list2 = [i for i in list1 if i.isupper()]
+print(list1)
+print(list2)
+
+# replace the normal for loop
+[print(i) for i in list2]   # Py3k only
+
+# one can also used dict comprehension
+d = {k: v for k, v in zip(list1, list2)}
+pprint(d)
+
+# nested, different meaning
+d = {k: v for k in list1 for v in list2}
+pprint(d)
+
+# it is often used together with str.join()
+print(', '.join(['e'+str(i) for i in range(1, 9, 2)]))
+</pre></p>
+</section>
+<section class="slide" id='speed-intrepreter'>
+    <h2>Talk about speed again</h2>
+    <ul>
+        <li>20/80 rule <ul>
+            <li>總執行時間有 80% 時間花在很重要的運算上，20% 則是一些雜事的處理與分析。</li>
+            <li>應該把寫 code 的時間，80% 花在最重要的運算上，20% 處理鳥事。</li>
+            <li>Python 的想法就是盡量把時間拿來寫重要的事，剩下的用內建的函數來處理就好。</li>
+        </ul></li>
+        <li>這邊的討論主要是針對很重要的運算而言</li>
+        <li>回到最初的interpreter上面</li>
+    </ul>
+<p><pre class="brush: bash">
+$ py demo_list_comp.py  # Python 2.7.3
+('Python for loop:', 4.578841924667358)
+('List Comprehension:', 3.3546900749206543)
+('List Comp. with string formatter:', 5.75505805015564)
+
+$ py3 demo_list_comp.py # Python 3.3.0
+Python for loop: 6.7832121060018835
+List Comprehension: 6.136769306001952
+List Comp. with string formatter: 5.403503191999334
+
+$ pypy demo_list_comp.py # pypy 1.9 (= 2.7.1)
+('Python for loop:', 1.4023900032043457)
+('List Comprehension:', 1.1529779434204102)
+('List Comp. with string formatter:', 2.1594371795654297)
+</pre></p>
+</section>
+<section class="slide" id='import'>
+    <h2>Back on <code>import</code></h2>
+    <p>Something about <code>namespace</code>. more on <a href="http://getpython3.com/diveintopython3/your-first-python-program.html#importsearchpath">@DiveIntoPython3</a></p>
+    <ul>
+        <li><code>from module import functions</code> <br />
+        有時候只要用到 module 的一兩個 function </li>
+        <li><code>import module (as nickname)</code> <br />
+        把整個 module(package) 匯進來</li>
+        <li>(Advanced) module name is a namespace. Class name is also a namespace. 不用硬記，多用幾次就會理解他的概念</li>
+        <li>(Advanced) namespace 的架構也包含了實際上的目錄架構。Ex. dir1/dir2/module will become: <pre class='brush: py'>
+            import dir1.dir2.module
+        </pre></li>
+    </ul>
+<p><pre class="brush: py">
+import os
+import datetime as dt   # 雖然 module 叫 datetime，
+                        # 但匯入時給他一個新的名字 - dt
+
+os.uname()              # 存取 module os 底下的東西
+dt.datetime.today()     # dt = module, 
+                        # datetime = dt 裡的一個 class (help 看來的)
+                        # today() = 這個 class 的一個 function
+print(__name__)         # 判斷現在的名字(namespace)
+                        # 如果是 __main__ 表示是被執行的那個程式
+</pre></p>
+</section>
+
+<section class="slide" id='import-demo'>
+<p>(continued)</p>
+<p><pre class="brush: py">
+import demo_string
+
+dir(demo_string)        # dir() 可以看到這個 object 的結構
+demo_string.strTime()   # 來呼叫裡面的函式
+from demo_string import strTime     # 直接把這個函式抓到我們現在的名字底下
+
+import os.path as op 
+op.realpath(os.curdir)  # os.path.realpath(os.path.curdir)
+                        # curdir is a attribute of os.path
+                        # (Advanced) don't import same class tree twice
+                        # op = os.path
+
+# --- reload a module ---
+from imp import reload  # necessary for Py3k, in 2.x it is a builtin fnt
+reload(demo_string)     # this module will be reloaded
+                        # if it is imported by from ... import ...
+                        # then it can be reloaded (losing namespace)
+
+# --- Advanced Part ---
+# they are just names :)
+dtdt = dt.datetime
+dtdt.today()
+</pre></p>
+    
+</section>
+<section class='slide' id='oop'>
+    <h2>OOP and Class</h2>
+<ul>
+    <li>No public, private, protected decorator. So every function and object is accessible.</li>
+    <li>可以多重繼承</li>
+    <li>instance method, class method, static method</li>
+    <li>More on <a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html">Types and Objects</a> and <a href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html">Attributes and Methods</a></li>
+    <li>我覺得用起來很簡單，但要了解全部的觀念需要一段時間，加上對語言本身的了解。</li>
+</ul>
+</section>
+<section class='slide' id='oop-demo-class'>
+<h3>Definition of Classes</h3>
+<p><pre class="brush: py">
+# demo_class.py
+class myFirstClass():
+    X = 'First'
+
+    def __init__(self, i):
+        self.seq = i        # attribute
+
+    def fnt1(self):         # instance method
+        print(self.seq, self.X)
+
+    def fnt2(self):
+        print('Second', self.seq)
+
+    @classmethod
+    def getClsName(cls):    # class method
+        print(cls.__name__, cls.X)
+
+    @staticmethod
+    def indepFnt():         # static method
+        print(1*1)
+
+
+class mySecondClass(myFirstClass):  # inherit from myFirstClass
+    X = 'Second'
+
+    def __init__(self, i):  # overloading
+        super().__init__(i*10)
+        self.son_seq = i
+
+    def fnt2(self):
+        super().fnt2()      # call myFirstClass.fnt2()
+        print('Son', self.son_seq)
+</pre></p>
+</section>
+
+<section class="slide" id='oop-demo-fnt'>
+<h3>Use these classes</h3>
+<p><pre class="brush: py">
+import demo_class as dc
+
+def demo():
+    print('--- static, class method requires no object ---')
+    dc.myFirstClass.indepFnt()
+    dc.myFirstClass.getClsName()
+    dc.mySecondClass.getClsName()
+
+    obj1 = dc.myFirstClass(3)
+    obj2 = dc.mySecondClass(7)
+
+    print('--- class method ---')
+    obj1.getClsName()
+    obj2.getClsName()
+
+    print('--- instance method ---')
+    obj1.fnt1()
+    obj2.fnt1()
+
+    obj1.fnt2()
+    obj2.fnt2()
+
+if __name__ == '__main__':
+    demo()
+</pre></p>
+</section>
+
+<section class="slide" id='remain'>
+    <h2>What we have left without mention</h2>
+    <p>其實，大部份的語言概念都已經介紹了。如果要更深入了解，可以就要學習Python 運作的方式。至少實務上不一定要很懂。</p>
+    <ul>
+        <li> Exception Handling <br />
+        應該是不難，查說明文件跟 google 就可以上手</li>
+        <li> @decorator <br />
+        有一點點不太好解釋，可能等比較熟練再來學比較好</li>
+        <li> Advanced topics on OOP: operator overloading, generator, ... <br />
+        要花很多時間，實用性也不高，不如等會 live demo 實用的東西</li>
+        <li> Python Standard Library <br />
+        恩…這個我也只會其中幾個而已，等一下來介紹一些</li>
+        <li> (Distributing) Package, 2to3, ... <br /> 
+        這部份我也在學習中…</li>
+        <li>Python/C API <br />
+        可以調用外部的 C, C++ 程式碼</li>
+    </ul>
+</section>
+
+<section class='slide' id="use-important">
+    <h1 style='color: DeepPink'>能用比較重要！！</h1>
+</section>
+
+<section class="slide" id='lib'>
+    <h2>Python Standard Library</h2>
+    <h4><code>os, sys, platform</code></h4>
+    <ul>
+      <li>跟系統相關，版本、跨平台的資訊</li>
+      <li>檔案系統的操作：複製、移動、連結</li>
+      <li>os.uname(), platform.platform(), sys.path</li>
+      <li>os.chdir(), os.getcwd(), os.makedirs(), os.rename(), os.remove(), </li>
+      <li>os.walk(), os.listdir(), glob.glob()</li>
+    </ul>
+    <h4><code>os.path</code></h4>
+    <ul>
+      <li>跟檔案路徑有關</li>
+      <li>realpath(), abspath(), dirname(), basename(), splitext(), join(), curdir</li>
+      <li>isdir(), isfile(), islink(), exists()</li>
+    </ul>
+</section>
+<section class='slide' id='lib-2'>
+    <h4><code>re</code></h4>
+    <ul>
+      <li>Regular Expression</li>
+      <li>compile(), search(), match()</li>
+      <li>re.MULTILINE</li>
+      <li>group(), group_dict()</li>
+    </ul>
+    <h4><code>time, datetime</code></h4>
+    <h4><code>csv</code></h4>
+    <h4><code>argparse</code></h4>
+    <h2>Summary - Standard Library</h2>
+    <ul>
+        <li>基本上各種應用都有相對應的 package 可以使用，我對網路、GUI(tkinter)這部份不是很常用。</li>
+        <li>More on <a href="http://docs.python.org/3/library/index.html">Library@Official</a></li>
+    </ul>
+</section>
+
+<section class="slide" id="package">
+    <h2>3rd-Party Package</h2>
+    <ul>
+        <li>我們可以將寫好的 module 打包成一個 package ，就可以讓大家來使用</li>
+        <li>跟 Perl 的 CPAN 一樣， Python 有一個管理 package 的網站 <a href="http://pypi.python.org/pypi">PyPI</a> </li>
+        <li>利用 <code>pip</code>, <code>easy_install</code> 方法來安裝</li>
+        <li>More on <a href="http://docs.python-guide.org/en/latest/#scenario-guide">Scenario Guide@The Hitchhiker's Guide to Python</a></li>
+    </ul>
+</section>
+
+<!-- slides end -->
+
+<!-- deck.js start -->
+<!-- Begin extension snippets. Add or remove as needed. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+    <label for="goto-slide">Go to slide:</label>
+    <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+    <datalist id="goto-datalist"></datalist>
+    <input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+<!-- End extension snippets. -->
+
+<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="lib/deck.js/jquery-1.7.2.min.js"><\/script>')</script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="lib/deck.js/core/deck.core.js"></script>
+<script src="lib/deck.js/extensions/hash/deck.hash.js"></script>
+<script src="lib/deck.js/extensions/menu/deck.menu.js"></script>
+<script src="lib/deck.js/extensions/goto/deck.goto.js"></script>
+<script src="lib/deck.js/extensions/status/deck.status.js"></script>
+<script src="lib/deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="lib/deck.js/extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+    $.deck('.slide');
+    var lastDate = new Date(new Date(document.lastModified).getTime()+8*3600*1000);
+    $('#lastedit').html('Last edit: ' + lastDate.getFullYear() + '.' + (lastDate.getMonth()+1) + '.' + lastDate.getDate()).css({
+      'font-weight':    'bold',
+      'color':          '#C71585'
+    });
+    </script>
+<!-- deck.js end -->
+
+</body>
+</html>
