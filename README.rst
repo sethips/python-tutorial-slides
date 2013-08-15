@@ -15,7 +15,7 @@ Introduction
 Old Version Slides
 ==================
 
-For old version of this version, which is powered by another framework `deck.js`_, can be found at http://ccwang002.github.io/python-tutorial-slides/old.2013.04/ . However, old version slides will not be further maintained.
+For old version of this version, which is powered by another framework `deck.js`_, can be found at http://ccwang002.github.io/python-tutorial-slides/old.2013.04/. However, old version slides will not be further maintained.
 
 .. _deck.js: http://imakewebthings.com/deck.js
 
@@ -23,11 +23,14 @@ For old version of this version, which is powered by another framework `deck.js`
 For Slides Uploading
 ====================
 
-I manage the online slides, equivalently the ``gh-pages`` branch, using `ghp-import`_, which can be installed by
+I manage the online slides, equivalently the ``gh-pages`` branch, using `ghp-import`_.
+
+It can be installed using ``pip``
 
 .. code-block:: bash
 
-    pip install ghp-import   # On Python 3.3 crashes, use Python 2.7 instead
+    # On Python 3.3 crashes, use Python 2.7 instead
+    pip install ghp-import
 
 To update the slides content shown in the ``gh-pages`` branch, it is simply one command away
 
