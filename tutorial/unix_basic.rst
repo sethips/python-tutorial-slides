@@ -192,3 +192,73 @@ Server 上 Vim 使用
 ==============   ===============================
  ``Ctrl+f``      源碼補完
 ==============   =============================== 
+
+
+
+第十一章、認識與學習 BASH 
+=========================
+
+用到的時候再來仔細看這章的內容。
+
+現在應該先以了解何謂 `pipeline`__
+
+__ http://linux.vbird.org/linux_basic/0320bash.php#pipe
+
+.. code-block:: bash
+
+    $ wc -l  sometxtfile                    # 計算總行數
+    $ head -n xxx txtfile > txtfile.part    # 只取用部份檔案
+
+    $ run commandA && run commandB          # 連續執行兩個程式
+
+    $ ... > ...
+    $ ... >> ...
+    $ ... | ... | ...
+
+目標
+----
+
+- 了解 BASH pipeline 的使用
+
+
+第十二章、正規表示法與文件格式化處理
+====================================
+
+知道有這樣的東西，我們先學 `Python 的正規表示套件`__
+
+__ http://docs.python.org/3/library/re.html
+
+
+####
+補充
+####
+
+Screen 使用
+===========
+
+未進入 screen 之前
+------------------
+
+.. code-block:: bash
+
+    $ screen -ls            # 查看現在有開啟多少個 screen
+    $ screen -t MyTitle     # 建立一個名為 MyTitle 的 screen
+    $ screen -R             # 只有一個 Detached screen 自動連接，不然建立新的
+    $ screen -r <pid...>    # 連接其中一個 detached screen
+    $ screen -x <pid...>    # 強迫連至一個　Attached screen
+
+
+進入 screen 之後
+----------------
+
+所有的動作都是以 ``Ctrl+a`` 開始，關閉一個 terminal 一樣使用 ``exit`` 或 ``Ctrl+D``
+
+======  ======
+ 指令    功能
+======  ======
+ ``c``   增加一個新的 terminal
+ ``d``   detach 當前的 screen
+ ``"``   查看現在的 screen 所有的 terminal 並切換
+ ``[``   加上下、 ``Ctrl+U/F`` 可以瀏覽先前 terminal 的內容 
+ ``a``   切換至最近開啟的一個 terminal
+======  ======
