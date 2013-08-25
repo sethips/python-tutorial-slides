@@ -36,6 +36,6 @@ To update the slides content shown in the ``gh-pages`` branch, it is simply one 
 
 .. code-block:: bash
 
-    ghp-import -m 'Update slides' -p slides
+    ghp-import -m 'Update slides' -p .
 
 .. _ghp-import: https://github.com/davisp/ghp-import
